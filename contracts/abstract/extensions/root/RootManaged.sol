@@ -1,0 +1,56 @@
+pragma ton-solidity ^0.40.0;
+
+import "./interfaces/IRootManaged.sol";
+import "../../Root.sol";
+
+/**
+ * Error codes
+ *     1000 - Method for the manager only
+ *     1001 - Manager address can't be null
+ */
+abstract contract RootManaged is Root, IRootManaged {
+    /*************
+     * VARIABLES *
+     *************/
+    address internal _manager;
+
+
+
+    /*************
+     * MODIFIERS *
+     *************/
+    modifier onlyManager {
+        require(msg.sender == _manager, 1000, "Method for the manager only");
+        _;
+    }
+
+    modifier managerIsNotNull(address manager) {
+        require(manager.value != 0, 1001, "Manager address can't be null");
+        _;
+    }
+
+
+
+    /***************
+     * CONSTRUCTOR *
+     ***************/
+    /**
+     * manager ... Contract that governs this contract.
+     */
+    constructor(address manager) public managerIsNotNull(manager) accept {
+        _manager = manager;
+    }
+
+
+
+    /***************************
+     * EXTERNAL * ONLY MANAGER *
+     ***************************/
+    /**
+     * Manager can change manager.
+     * manager ... Contract that governs this contract.
+     */
+    function changeManager(address manager) override external onlyManager managerIsNotNull(manager) accept {
+        _manager = manager;
+    }
+}
