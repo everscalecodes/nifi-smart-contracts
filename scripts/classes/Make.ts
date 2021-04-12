@@ -1,9 +1,11 @@
 import path from 'path'
-import config from '../../configs/config'
 import {exec, ExecException} from 'child_process'
 import {red, green} from 'colors'
+import root from '../../root'
+import config from '../../configs/config'
 import TaskInterface from './interfaces/TaskInterface'
 import MakeConfigInterface from './interfaces/MakeConfigInterface'
+import MakeJSON from './MakeJSON'
 
 enum TaskType {
     COMPILE = 'compile',
@@ -46,12 +48,14 @@ export default class Make {
     private _read(relativePaths: string[] = [], type: TaskType): void {
         for (let i: number = 0; i < relativePaths.length; i++) {
             const relativePath: string = relativePaths[i]
-            const directory: string = path.dirname(relativePath)
+            const absolutePath: string = path.resolve(root, relativePath)
+            const directory: string = path.resolve(root, path.dirname(relativePath))
             const fileName: string = path.basename(relativePath)
             const commands: string = Make._generateCommands(directory, fileName, type)
             this._tasks.push({
                 commands: commands,
-                path: relativePath
+                relativePath: relativePath,
+                absolutePath: absolutePath
             })
         }
     }
@@ -70,15 +74,18 @@ export default class Make {
      *     tvm_linker decode --tvc RandomToken.tvc > RandomToken.decode`
      */
     private static _generateCommands(directory: string, fileName: string, type: TaskType): string {
+        const compiler: string = config.make.compiler
+        const tvmLinker: string = config.make.tonVirtualMachineLinker
+        const compilerLibrary: string = config.make.compilerLibrary
         return (type === TaskType.COMPILE)
             ?
-`cd ${directory}
-${config.make.compiler} ${fileName}.sol
-${config.make.tonVirtualMachineLinker} compile ${fileName}.code -o ${fileName}.tvc --lib ${config.make.compilerLibrary}
-${config.make.tonVirtualMachineLinker} decode --tvc ${fileName}.tvc > ${fileName}.decode`
+                `cd ${directory}
+                ${compiler} ${fileName}.sol
+                ${tvmLinker} compile ${fileName}.code -o ${fileName}.tvc --lib ${compilerLibrary}
+                ${tvmLinker} decode --tvc ${fileName}.tvc > ${fileName}.decode`
             :
-`cd ${directory}
-${config.make.tonVirtualMachineLinker} decode --tvc ${fileName}.tvc > ${fileName}.decode`
+                `cd ${directory}
+                ${tvmLinker} decode --tvc ${fileName}.tvc > ${fileName}.decode`
     }
 
     /**
@@ -108,7 +115,8 @@ ${config.make.tonVirtualMachineLinker} decode --tvc ${fileName}.tvc > ${fileName
         else if (standardError.length)
             console.error(red(standardError))
         else {
-            console.log(`${green('✓')} ${this._currentTask.path}`)
+            MakeJSON.generate(this._currentTask.absolutePath)
+            console.log(`${green('✓')} ${this._currentTask.relativePath}`)
             this._tryRunNextTask()
         }
     }

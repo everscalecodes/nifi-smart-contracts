@@ -1,4 +1,5 @@
 export default interface TaskInterface {
     commands: string
-    path: string
+    relativePath: string
+    absolutePath: string
 }
