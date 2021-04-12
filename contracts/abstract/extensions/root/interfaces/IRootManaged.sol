@@ -9,4 +9,15 @@ interface IRootManaged {
      * manager ... Contract that governs this contract.
      */
     function changeManager(address manager) external;
+
+
+
+    /*************
+     * RECEIVERS *
+     *************/
+    /**
+     * Returns manager address.
+     * manager ... Contract that governs this contract.
+     */
+    function receiveManager() external view responsible returns(address manager);
 }

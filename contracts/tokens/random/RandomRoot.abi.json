@@ -92,6 +92,23 @@
 			]
 		},
 		{
+			"name": "receiveManager",
+			"inputs": [
+				{"name":"_answer_id","type":"uint32"}
+			],
+			"outputs": [
+				{"name":"manager","type":"address"}
+			]
+		},
+		{
+			"name": "getManager",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"manager","type":"address"}
+			]
+		},
+		{
 			"name": "receiveInfo",
 			"inputs": [
 				{"name":"_answer_id","type":"uint32"}

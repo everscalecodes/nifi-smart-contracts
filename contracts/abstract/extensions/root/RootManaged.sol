@@ -53,4 +53,30 @@ abstract contract RootManaged is Root, IRootManaged {
     function changeManager(address manager) override external onlyManager managerIsNotNull(manager) accept {
         _manager = manager;
     }
+
+
+
+    /*************
+     * RECEIVERS *
+     *************/
+    /**
+     * Returns manager address.
+     * manager ... Contract that governs this contract.
+     */
+    function receiveManager() override external view responsible returns(address manager) {
+        return{value: 0, bounce: false, flag: 64} getManager();
+    }
+
+
+
+    /***********
+     * GETTERS *
+     ***********/
+    /**
+     * Returns manager address.
+     * manager ... Contract that governs this contract.
+     */
+    function getManager() public view returns(address manager) {
+        manager = _manager;
+    }
 }
