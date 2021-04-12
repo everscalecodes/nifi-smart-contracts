@@ -8,7 +8,7 @@ const make:Make = new Make({
         'contracts/tokens/art/ArtToken'
     ],
     decode: [
-        'tests/contracts/SafeMultisigWallet'
+        'common/contracts/SafeMultisigWallet'
     ]
 })
 make.run()
