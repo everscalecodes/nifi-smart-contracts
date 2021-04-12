@@ -6,6 +6,9 @@ const make:Make = new Make({
         'contracts/tokens/random/RandomToken',
         'contracts/tokens/art/ArtRoot',
         'contracts/tokens/art/ArtToken'
+    ],
+    decode: [
+        'tests/contracts/SafeMultisigWallet'
     ]
 })
 make.run()
