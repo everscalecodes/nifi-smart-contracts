@@ -1,13 +1,11 @@
 import Make from './classes/Make'
-import MakeConfigInterface from './classes/interfaces/MakeConfigInterface'
 
-const config: MakeConfigInterface = {
+const make:Make = new Make({
     compile: [
         'contracts/tokens/random/RandomRoot',
         'contracts/tokens/random/RandomToken',
         'contracts/tokens/art/ArtRoot',
         'contracts/tokens/art/ArtToken'
     ]
-}
-const make:Make = new Make(config)
+})
 make.run()
