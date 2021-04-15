@@ -31,13 +31,6 @@ interface IToken {
      * EXTERNAL * ONLY LOCKED MANAGER *
      **********************************/
     /**
-     * Manager can unlock himself and change owner.
-     * If manager is already unlocked, call revert().
-     * owner ... Public key of token owner.
-     */
-    function unlockAndChangeOwner(uint256 owner) external;
-
-    /**
      * Manager can unlock himself.
      * If manager is already unlocked, call revert().
      */

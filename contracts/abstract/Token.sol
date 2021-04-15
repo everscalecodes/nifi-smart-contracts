@@ -192,17 +192,6 @@ abstract contract Token is IToken {
      * EXTERNAL * ONLY LOCKED MANAGER *
      **********************************/
     /**
-     * Manager can unlock himself and change owner.
-     * If manager is already unlocked, call revert().
-     * owner ... Public key of token owner.
-     */
-    function unlockAndChangeOwner(uint256 owner) override external onlyManager locked ownerIsNotNull(owner) {
-        _owner = owner;
-        _managerUnlockTime = 0;
-        emit ChangeOwnerEvent(_id, _owner).extAddr(_root);
-    }
-
-    /**
      * Manager can unlock himself.
      * If manager is already unlocked, call revert().
      */
