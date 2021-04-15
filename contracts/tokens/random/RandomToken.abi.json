@@ -55,14 +55,6 @@
 			]
 		},
 		{
-			"name": "unlockAndChangeOwner",
-			"inputs": [
-				{"name":"owner","type":"uint256"}
-			],
-			"outputs": [
-			]
-		},
-		{
 			"name": "unlock",
 			"inputs": [
 			],
