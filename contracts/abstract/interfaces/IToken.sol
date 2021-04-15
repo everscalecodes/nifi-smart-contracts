@@ -1,20 +1,15 @@
 pragma ton-solidity ^0.40.0;
 
 interface IToken {
-    /*******************************************
-     * EXTERNAL * ONLY OWNER OR LOCKED MANAGER *
-     *******************************************/
+    /*******************************************************
+     * EXTERNAL * ONLY OWNER IF UNLOCKED OR LOCKED MANAGER *
+     *******************************************************/
     /**
      * Owner or manager can change token owner.
      * owner ... Public key of token owner.
      */
     function changeOwner(uint256 owner) external;
 
-
-
-    /*************************
-     * EXTERNAL * ONLY OWNER *
-     *************************/
     /**
      * Owner can set manager and lock. To prevent manager from replacing during trading, he is locked.
      * If manager is already locked, call revert().
@@ -32,9 +27,9 @@ interface IToken {
 
 
 
-    /*******************************************************
-     * EXTERNAL * ONLY OWNER IF UNLOCKED OR LOCKED MANAGER *
-     *******************************************************/
+    /**********************************
+     * EXTERNAL * ONLY LOCKED MANAGER *
+     **********************************/
     /**
      * Manager can unlock himself and change owner.
      * If manager is already unlocked, call revert().

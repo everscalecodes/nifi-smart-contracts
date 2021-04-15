@@ -153,11 +153,6 @@ abstract contract Token is IToken {
         emit ChangeOwnerEvent(_id, _owner).extAddr(_root);
     }
 
-
-
-    /*************************
-     * EXTERNAL * ONLY OWNER *
-     *************************/
     /**
      * Owner can set manager and lock. To prevent manager from replacing during trading, he is locked.
      * If manager is already locked, call revert().
@@ -167,8 +162,7 @@ abstract contract Token is IToken {
     function lockManager(address manager, uint32 unlockTime)
         override
         external
-        onlyOwner
-        unlocked
+        onlyOwnerIfUnlockedOrLockedManager
         managerIsNotNull(manager)
         unlockTimeIsValid(unlockTime)
         accept
@@ -185,8 +179,7 @@ abstract contract Token is IToken {
     function lock(uint32 unlockTime)
         override
         external
-        onlyOwner
-        unlocked
+        onlyOwnerIfUnlockedOrLockedManager
         unlockTimeIsValid(unlockTime)
         accept
     {
