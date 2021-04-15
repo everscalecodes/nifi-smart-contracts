@@ -1,4 +1,4 @@
-pragma ton-solidity ^0.40.0;
+pragma ton-solidity ^0.41.0;
 
 import "../../abstract/Root.sol";
 import "../../abstract/extensions/root/RootManaged.sol";

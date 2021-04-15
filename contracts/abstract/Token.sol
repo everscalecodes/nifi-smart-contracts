@@ -68,7 +68,7 @@ abstract contract Token is IToken {
         _;
     }
 
-    modifier onlyOwnerIfUnlockedOrLockedManager {
+    modifier onlyUnlockedOwnerOrLockedManager {
         require(
             (msg.pubkey() == _owner && now >= _managerUnlockTime) ||
             (msg.sender == _manager && now < _managerUnlockTime),
@@ -145,7 +145,7 @@ abstract contract Token is IToken {
     function changeOwner(uint256 owner)
         override
         external
-        onlyOwnerIfUnlockedOrLockedManager
+        onlyUnlockedOwnerOrLockedManager
         ownerIsNotNull(owner)
         accept
     {
@@ -162,7 +162,7 @@ abstract contract Token is IToken {
     function lockManager(address manager, uint32 unlockTime)
         override
         external
-        onlyOwnerIfUnlockedOrLockedManager
+        onlyUnlockedOwnerOrLockedManager
         managerIsNotNull(manager)
         unlockTimeIsValid(unlockTime)
         accept
@@ -179,7 +179,7 @@ abstract contract Token is IToken {
     function lock(uint32 unlockTime)
         override
         external
-        onlyOwnerIfUnlockedOrLockedManager
+        onlyUnlockedOwnerOrLockedManager
         unlockTimeIsValid(unlockTime)
         accept
     {

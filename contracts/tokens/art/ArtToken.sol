@@ -75,7 +75,7 @@ contract ArtToken is Token, IArtToken {
      * Owner or manager can add new hash.
      * hash ... Hash of data that associated with token.
      */
-    function addHash(uint256 hash) override external onlyOwnerIfUnlockedOrLockedManager accept {
+    function addHash(uint256 hash) override external onlyUnlockedOwnerOrLockedManager accept {
         _hashes.push(hash);
     }
 
