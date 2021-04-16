@@ -1,9 +1,9 @@
 pragma ton-solidity ^0.41.0;
 
-import "../../abstract/Token.sol";
+import "../../abstract/TokenPublicKey.sol";
 import "interfaces/IArtToken.sol";
 
-contract ArtToken is Token, IArtToken {
+contract ArtToken is TokenPublicKey, IArtToken {
     /*************
      * VARIABLES *
      *************/
@@ -33,7 +33,7 @@ contract ArtToken is Token, IArtToken {
         uint256 hash
     )
         public
-        Token(
+        TokenPublicKey(
             owner,
             manager,
             managerUnlockTime

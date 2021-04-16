@@ -1,9 +1,9 @@
 pragma ton-solidity ^0.41.0;
 
-import "../../abstract/Token.sol";
+import "../../abstract/TokenPublicKey.sol";
 import "interfaces/IRandomToken.sol";
 
-contract RandomToken is Token, IRandomToken {
+contract RandomToken is TokenPublicKey, IRandomToken {
     /*************
      * VARIABLES *
      *************/
@@ -19,7 +19,7 @@ contract RandomToken is Token, IRandomToken {
      * manager ............. Contract that governs this contract.
      * managerUnlockTime ... UNIX time. Time when the manager can be unlocked.
      */
-    constructor(uint256 owner, address manager, uint32 managerUnlockTime) public Token(
+    constructor(uint256 owner, address manager, uint32 managerUnlockTime) public TokenPublicKey(
             owner,
             manager,
             managerUnlockTime

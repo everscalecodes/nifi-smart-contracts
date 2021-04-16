@@ -66,30 +66,6 @@
 			]
 		},
 		{
-			"name": "lockManager",
-			"inputs": [
-				{"name":"manager","type":"address"},
-				{"name":"unlockTime","type":"uint32"}
-			],
-			"outputs": [
-			]
-		},
-		{
-			"name": "lock",
-			"inputs": [
-				{"name":"unlockTime","type":"uint32"}
-			],
-			"outputs": [
-			]
-		},
-		{
-			"name": "unlock",
-			"inputs": [
-			],
-			"outputs": [
-			]
-		},
-		{
 			"name": "receiveInfo",
 			"inputs": [
 				{"name":"_answer_id","type":"uint32"}
@@ -114,6 +90,30 @@
 				{"name":"owner","type":"uint256"},
 				{"name":"manager","type":"address"},
 				{"name":"managerUnlockTime","type":"uint32"}
+			]
+		},
+		{
+			"name": "lockManager",
+			"inputs": [
+				{"name":"manager","type":"address"},
+				{"name":"unlockTime","type":"uint32"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "lock",
+			"inputs": [
+				{"name":"unlockTime","type":"uint32"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "unlock",
+			"inputs": [
+			],
+			"outputs": [
 			]
 		}
 	],
