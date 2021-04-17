@@ -7,9 +7,41 @@
 			"inputs": [
 				{"name":"ownerAddress","type":"address"},
 				{"name":"manager","type":"address"},
-				{"name":"managerUnlockTime","type":"uint32"}
+				{"name":"managerUnlockTime","type":"uint32"},
+				{"name":"hash","type":"uint128"},
+				{"name":"freezingTimeStart","type":"uint32"},
+				{"name":"freezingTimeEnd","type":"uint32"}
 			],
 			"outputs": [
+			]
+		},
+		{
+			"name": "receiveTicketInfo",
+			"inputs": [
+				{"name":"_answer_id","type":"uint32"}
+			],
+			"outputs": [
+				{"name":"hash","type":"uint128"},
+				{"name":"freezingTimeStart","type":"uint32"},
+				{"name":"freezingTimeEnd","type":"uint32"}
+			]
+		},
+		{
+			"name": "setHash",
+			"inputs": [
+				{"name":"hash","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "getTicketInfo",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"hash","type":"uint128"},
+				{"name":"freezingTimeStart","type":"uint32"},
+				{"name":"freezingTimeEnd","type":"uint32"}
 			]
 		},
 		{

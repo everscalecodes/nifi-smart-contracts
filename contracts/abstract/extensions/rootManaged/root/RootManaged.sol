@@ -1,7 +1,7 @@
 pragma ton-solidity ^0.41.0;
 
 import "./interfaces/IRootManaged.sol";
-import "../../Root.sol";
+import "../../../Root.sol";
 
 /**
  * Error codes

@@ -1,9 +1,9 @@
 pragma ton-solidity ^0.41.0;
 
 import "../../abstract/Root.sol";
-import "../../abstract/extensions/root/RootManaged.sol";
-import "../../abstract/extensions/root/RootManagedCreationFee.sol";
-import "../../abstract/extensions/root/RootManagedWithdraw.sol";
+import "../../abstract/extensions/rootManaged/root/RootManaged.sol";
+import "../../abstract/extensions/rootManaged/root/RootManagedCreationFee.sol";
+import "../../abstract/extensions/rootManaged/root/RootManagedWithdraw.sol";
 import "ArtToken.sol";
 import "interfaces/IArtRoot.sol";
 
