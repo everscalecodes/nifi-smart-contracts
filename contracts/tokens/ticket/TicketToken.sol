@@ -2,8 +2,9 @@ pragma ton-solidity ^0.41.0;
 
 import "../../abstract/TokenAddress.sol";
 import "./interfaces/ITicketToken.sol";
+import "../../abstract/extensions/tokenChangeOwnerMessageToRoot/token/TokenChangeOwnerAddressMessageToRoot.sol";
 
-contract TicketToken is TokenAddress, ITicketToken {
+contract TicketToken is TokenAddress, TokenChangeOwnerAddressMessageToRoot, ITicketToken {
     /*************
      * VARIABLES *
      *************/
@@ -41,26 +42,6 @@ contract TicketToken is TokenAddress, ITicketToken {
         _freezingTimeStart = freezingTimeStart;
         _freezingTimeEnd = freezingTimeEnd;
     }
-
-//
-//
-//    /*******************************************************
-//     * EXTERNAL * ONLY OWNER IF UNLOCKED OR LOCKED MANAGER *
-//     *******************************************************/
-//    /**
-//     * Owner or manager can change token owner address.
-//     * ownerAddress ... Address of token owner.
-//     */
-//    function changeOwnerAddress(address ownerAddress)
-//        override
-//        external
-//        onlyUnlockedOwnerOrLockedManager
-//        addressIsNotNull(ownerAddress)
-//        accept
-//    {
-//        _ownerAddress = ownerAddress;
-//        emit ChangeOwnerAddressEvent(_id, _ownerAddress).extAddr(_root);
-//    }
 
 
 

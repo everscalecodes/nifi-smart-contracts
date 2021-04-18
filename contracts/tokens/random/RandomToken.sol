@@ -2,8 +2,9 @@ pragma ton-solidity ^0.41.0;
 
 import "../../abstract/TokenPublicKey.sol";
 import "interfaces/IRandomToken.sol";
+import "../../abstract/extensions/tokenChangeOwnerEvent/token/TokenChangeOwnerEvent.sol";
 
-contract RandomToken is TokenPublicKey, IRandomToken {
+contract RandomToken is TokenPublicKey, TokenChangeOwnerEvent, IRandomToken {
     /*************
      * VARIABLES *
      *************/

@@ -126,6 +126,7 @@
 			"name": "ChangeOwnerEvent",
 			"inputs": [
 				{"name":"id","type":"uint128"},
+				{"name":"previousOwner","type":"uint256"},
 				{"name":"owner","type":"uint256"}
 			],
 			"outputs": [

@@ -2,8 +2,9 @@ pragma ton-solidity ^0.41.0;
 
 import "../../abstract/TokenPublicKey.sol";
 import "interfaces/IArtToken.sol";
+import "../../abstract/extensions/tokenChangeOwnerEvent/token/TokenChangeOwnerEvent.sol";
 
-contract ArtToken is TokenPublicKey, IArtToken {
+contract ArtToken is TokenPublicKey, TokenChangeOwnerEvent, IArtToken {
     /*************
      * VARIABLES *
      *************/

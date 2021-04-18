@@ -109,14 +109,5 @@
 		{"key":2,"name":"_id","type":"uint128"}
 	],
 	"events": [
-		{
-			"name": "ChangeOwnerAddressEvent",
-			"inputs": [
-				{"name":"id","type":"uint128"},
-				{"name":"ownerAddress","type":"address"}
-			],
-			"outputs": [
-			]
-		}
 	]
 }

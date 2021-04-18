@@ -26,16 +26,6 @@ import "interfaces/ITokenPublicKey.sol";
  *     201 - Address can't be null
  */
 abstract contract TokenPublicKey is Token, PublicKeyValidator, ITokenPublicKey {
-    /**********
-     * EVENTS *
-     **********/
-    event ChangeOwnerEvent(
-        uint128 id,
-        uint256 owner
-    );
-
-
-
     /*************
      * VARIABLES *
      *************/
@@ -77,8 +67,9 @@ abstract contract TokenPublicKey is Token, PublicKeyValidator, ITokenPublicKey {
         publicKeyIsNotNull(owner)
         accept
     {
+        uint256 previousOwner = _owner;
         _owner = owner;
-        emit ChangeOwnerEvent(_id, _owner).extAddr(_root);
+        _onChangeOwner(previousOwner, owner);
     }
 
 
@@ -149,4 +140,9 @@ abstract contract TokenPublicKey is Token, PublicKeyValidator, ITokenPublicKey {
     function _onlyOwner() override internal view returns(bool) {
         return msg.pubkey() == _owner;
     }
+
+    /**
+     * Call after change of public key of token owner.
+     */
+    function _onChangeOwner(uint256 previousOwner, uint256 owner) virtual internal;
 }

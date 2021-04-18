@@ -24,16 +24,6 @@ import "interfaces/ITokenAddress.sol";
  *     201 - Address can't be null
  */
 abstract contract TokenAddress is Token, ITokenAddress {
-    /**********
-     * EVENTS *
-     **********/
-    event ChangeOwnerAddressEvent(
-        uint128 id,
-        address ownerAddress
-    );
-
-
-
     /*************
      * VARIABLES *
      *************/
@@ -75,8 +65,9 @@ abstract contract TokenAddress is Token, ITokenAddress {
         addressIsNotNull(ownerAddress)
         accept
     {
+        address previousOwnerAddress = _ownerAddress;
         _ownerAddress = ownerAddress;
-        emit ChangeOwnerAddressEvent(_id, _ownerAddress).extAddr(_root);
+        _onChangeOwnerAddress(previousOwnerAddress, ownerAddress);
     }
 
 
@@ -147,4 +138,9 @@ abstract contract TokenAddress is Token, ITokenAddress {
     function _onlyOwner() override internal view returns(bool) {
         return msg.sender == _ownerAddress;
     }
+
+    /**
+     * Call after change of address of token owner.
+     */
+    function _onChangeOwnerAddress(address previousOwnerAddress, address ownerAddress) virtual internal;
 }
