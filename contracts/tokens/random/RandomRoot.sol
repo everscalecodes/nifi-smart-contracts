@@ -39,7 +39,7 @@ contract RandomRoot is Root, RootManaged, RootManagedCreationFee, RootManagedWit
      * EXTERNAL *
      ************/
     /**
-     * Create token contract and returns address. Accept 0.1 ton and more.
+     * Create token contract and returns address.
      * owner ............... Public key of token owner.
      * manager ............. Contract that governs token contract.
      *                       If you don't want to set the manager, use 0:000011112222...
