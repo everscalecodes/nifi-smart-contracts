@@ -33,6 +33,16 @@ abstract contract TokenPublicKey is Token, PublicKeyValidator, ITokenPublicKey {
 
 
 
+    /*************
+     * MODIFIERS *
+     *************/
+    modifier canChangeOwner() {
+        _canChangeOwner();
+        _;
+    }
+
+
+
     /***************
      * CONSTRUCTOR *
      ***************/
@@ -145,4 +155,9 @@ abstract contract TokenPublicKey is Token, PublicKeyValidator, ITokenPublicKey {
      * Call after change of public key of token owner.
      */
     function _onChangeOwner(uint256 previousOwner, uint256 owner) virtual internal;
+
+    /**
+     * Revert() if owner or manager can't change owner address.
+     */
+    function _canChangeOwner() virtual internal;
 }

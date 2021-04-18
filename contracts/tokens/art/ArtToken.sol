@@ -113,4 +113,14 @@ contract ArtToken is TokenPublicKey, TokenChangeOwnerEvent, IArtToken {
         for (uint32 i = offset; i < maxIndex; i++)
             hashes.push(hashesMemory[i]);
     }
+
+
+
+    /************
+     * INTERNAL *
+     ************/
+    /**
+     * Revert() if owner or manager can't change owner address.
+     */
+    function _canChangeOwner() override internal {}
 }

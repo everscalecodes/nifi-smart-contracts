@@ -55,4 +55,14 @@ contract RandomToken is TokenPublicKey, TokenChangeOwnerEvent, IRandomToken {
     function getRandom() public view returns(uint256 random) {
         random = _random;
     }
+
+
+
+    /************
+     * INTERNAL *
+     ************/
+    /**
+     * Revert() if owner or manager can't change owner address.
+     */
+    function _canChangeOwner() override internal {}
 }

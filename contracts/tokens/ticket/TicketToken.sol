@@ -4,6 +4,20 @@ import "../../abstract/TokenAddress.sol";
 import "./interfaces/ITicketToken.sol";
 import "../../abstract/extensions/tokenChangeOwnerMessageToRoot/token/TokenChangeOwnerAddressMessageToRoot.sol";
 
+/**
+ * Error codes
+ *     100 - Method for the owner only
+ *     101 - Method for the manager only
+ *     102 - Method for the owner or manager only
+ *     103 - Method for the root only
+ *     104 - Manager unlocked
+ *     105 - Manager locked
+ *     106 - Invalid lock time
+ *
+ *     201 - Address can't be null
+ *
+ *     300 - Ticket is freezing
+ */
 contract TicketToken is TokenAddress, TokenChangeOwnerAddressMessageToRoot, ITicketToken {
     /*************
      * VARIABLES *
@@ -96,5 +110,17 @@ contract TicketToken is TokenAddress, TokenChangeOwnerAddressMessageToRoot, ITic
         hash = _hash;
         freezingTimeStart = _freezingTimeStart;
         freezingTimeEnd = _freezingTimeEnd;
+    }
+
+
+
+    /************
+     * INTERNAL *
+     ************/
+    /**
+     * Revert() if owner or manager can't change owner address.
+     */
+    function _canChangeOwnerAddress() override internal {
+        require(now < _freezingTimeStart || now > _freezingTimeEnd, 300, "Ticket is freezing");
     }
 }

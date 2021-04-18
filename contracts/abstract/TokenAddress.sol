@@ -31,6 +31,16 @@ abstract contract TokenAddress is Token, ITokenAddress {
 
 
 
+    /*************
+     * MODIFIERS *
+     *************/
+    modifier canChangeOwnerAddress() {
+        _canChangeOwnerAddress();
+        _;
+    }
+
+
+
     /***************
      * CONSTRUCTOR *
      ***************/
@@ -63,6 +73,7 @@ abstract contract TokenAddress is Token, ITokenAddress {
         external
         onlyUnlockedOwnerOrLockedManager
         addressIsNotNull(ownerAddress)
+        canChangeOwnerAddress
         accept
     {
         address previousOwnerAddress = _ownerAddress;
@@ -143,4 +154,9 @@ abstract contract TokenAddress is Token, ITokenAddress {
      * Call after change of address of token owner.
      */
     function _onChangeOwnerAddress(address previousOwnerAddress, address ownerAddress) virtual internal;
+
+    /**
+     * Revert() if owner or manager can't change owner address.
+     */
+    function _canChangeOwnerAddress() virtual internal;
 }
