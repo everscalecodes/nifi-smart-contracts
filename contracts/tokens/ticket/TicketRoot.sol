@@ -29,6 +29,7 @@ contract TicketRoot is
      *************/
     uint32 private _freezingTimeStart;
     uint32 private _freezingTimeEnd;
+    mapping(address => mapping(uint128 => bool)) _ids;
 
 
 
@@ -110,9 +111,8 @@ contract TicketRoot is
             _freezingTimeStart,
             _freezingTimeEnd
         );
+        _ids[ownerAddress][_totalSupply] = true;
         _totalSupply++;
-
-        // TODO add token into map
     }
 
     /**
@@ -126,7 +126,8 @@ contract TicketRoot is
         external
         onlyToken(id)
     {
-        // TODO move token in map
+        delete _ids[previousOwnerAddress][id];
+        _ids[ownerAddress][id] = true;
     }
 
 
@@ -149,10 +150,10 @@ contract TicketRoot is
      * GETTERS *
      ***********/
     /**
-    * Returns the address of the token contract calculated by id.
-    * id ..... Id of token.
-    * addr ... Address of the token contract.
-    */
+     * Returns the address of the token contract calculated by id.
+     * id ..... Id of token.
+     * addr ... Address of the token contract.
+     */
     function getTokenAddress(uint128 id) override public view returns(address addr) {
         TvmCell stateInit = tvm.buildStateInit({
         contr: TicketToken,
@@ -164,6 +165,27 @@ contract TicketRoot is
             code: _tokenCode
         });
         return address(tvm.hash(stateInit));
+    }
+
+
+    /**
+     * Generates pseudo random uint128 number.
+     * key ... Pseudo random uint128 number.
+     */
+    function getSecretKey() public pure returns(uint128 key) {
+        rnd.shuffle();
+        return uint128(rnd.next() % (1 << 128));
+    }
+
+    /**
+     * Generates hash of secret key.
+     * key ... uint128 hash of key.
+     */
+    function geHash(uint128 key) public pure returns(uint128 hash) {
+        TvmBuilder builder;
+        builder.store(key);
+        TvmCell cell = builder.toCell();
+        return uint128(tvm.hash(cell) % (1 << 128));
     }
 
     // TODO get token from map

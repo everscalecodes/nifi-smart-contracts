@@ -57,6 +57,23 @@
 			]
 		},
 		{
+			"name": "getSecretKey",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"key","type":"uint128"}
+			]
+		},
+		{
+			"name": "geHash",
+			"inputs": [
+				{"name":"key","type":"uint128"}
+			],
+			"outputs": [
+				{"name":"hash","type":"uint128"}
+			]
+		},
+		{
 			"name": "withdraw",
 			"inputs": [
 				{"name":"addr","type":"address"},
