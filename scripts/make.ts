@@ -6,7 +6,8 @@ const make:Make = new Make({
         'contracts/tokens/random/RandomToken',
         'contracts/tokens/art/ArtRoot',
         'contracts/tokens/art/ArtToken',
-        'contracts/tokens/ticket/TicketToken'
+        'contracts/tokens/ticket/TicketToken',
+        'contracts/tokens/ticket/TicketRoot'
     ],
     decode: [
         'common/contracts/SafeMultisigWallet'
