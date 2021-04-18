@@ -12,16 +12,19 @@ contract RandomRoot is Root, RootManaged, RootManagedCreationFee, RootManagedWit
      * CONSTRUCTOR *
      ***************/
     /**
-     * name ........ UTF8-encoded name of token. e.g. "CryptoKitties"
-     * symbol ...... UTF8-encoded symbol of token. e.g. "CK"
-     * tokenCode ... Code of token contract.
+     * manager ............ Contract that governs token contract.
+     * creationMinValue ... The minimum value that needs to be sent to the root to create a token.
+     * creationFee ........ Payment for the work of the contract, plus money for the developers.
+     * name ............... UTF8-encoded name of token. e.g. "CryptoKitties"
+     * symbol ............. UTF8-encoded symbol of token. e.g. "CK"
+     * tokenCode .......... Code of token contract.
      */
     constructor(
         address manager,
         uint128 creationMinValue,
         uint128 creationFee,
-        string name,
-        string symbol,
+        string  name,
+        string  symbol,
         TvmCell tokenCode
     )
         public
