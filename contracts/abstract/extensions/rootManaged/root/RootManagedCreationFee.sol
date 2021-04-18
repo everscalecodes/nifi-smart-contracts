@@ -30,7 +30,8 @@ abstract contract RootManagedCreationFee is RootManaged, IRootManagedCreationFee
      * CONSTRUCTOR *
      ***************/
     /**
-     * manager ... Contract that governs this contract.
+     * minValue ... The minimum value that needs to be sent to the root to create a token.
+     * fee ........ Payment for the work of the contract, plus money for the developers.
      */
     constructor(uint128 minValue, uint128 fee) public accept {
         _creationMinValue = minValue;
