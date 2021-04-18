@@ -1,6 +1,9 @@
 pragma ton-solidity ^0.41.0;
 
 interface IRootTokenChangeOwner {
+    /************
+     * EXTERNAL *
+     ************/
     /**
      * Call after change of contract owner.
      * id .............. Id of token.
