@@ -4,15 +4,15 @@
 * [Yarn](https://classic.yarnpkg.com) >= `1.22.x`
 * [TON Solidity Compiler](https://github.com/tonlabs/TON-Solidity-Compiler) = `0.41`
 * [TVM linker](https://github.com/tonlabs/TVM-linker) >= `0.3.x`
-* [TON Labs Dev command line tool](https://github.com/tonlabs/ton-dev-cli) >= `0.17.x`
+* [Free TON Development Environment](https://github.com/tonlabs/tondev) >= `0.4.x`
 
-## Run a local node for tests
+## Set up local node
 ```sh
-tondev add nifi
-tondev set --port 8080 nifi
+tondev se set --port 8080
+tondev se start
 ```
 
-## Set up
+## Set up project
 ```sh
 yarn install
 ```
