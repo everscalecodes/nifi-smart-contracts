@@ -7,10 +7,12 @@ node_modules
 # Contracts
 contracts/**/*.code
 contracts/**/*.conf.json
+contracts/**/*.keys.json
 
-# Tests contracts
+# Test contracts
 common/contracts/**/*.code
 common/contracts/**/*.conf.json
+common/contracts/**/*.keys.json
 
 # Yarn
 *.log
