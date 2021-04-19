@@ -10,7 +10,8 @@ const make:Make = new Make({
         'contracts/tokens/ticket/TicketRoot'
     ],
     decode: [
-        'common/contracts/SafeMultisigWallet'
+        'common/contracts/SafeMultisigWallet/SafeMultisigWallet',
+        'common/contracts/GiverV2/GiverV2'
     ]
 })
 make.run()
