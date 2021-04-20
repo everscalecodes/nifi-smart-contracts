@@ -164,8 +164,8 @@ contract TicketRoot is
      */
     function receiveTicketInfo() override external view responsible returns(
             uint128 limit,
-            uint32 freezingTimeStart,
-            uint32 freezingTimeEnd
+            uint32  freezingTimeStart,
+            uint32  freezingTimeEnd
         )
     {
         return{value: 0, bounce: false, flag: 64} getTicketInfo();

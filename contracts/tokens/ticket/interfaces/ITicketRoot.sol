@@ -20,7 +20,7 @@ interface ITicketRoot {
      */
     function receiveTicketInfo() external view responsible returns(
             uint128 limit,
-            uint32 freezingTimeStart,
-            uint32 freezingTimeEnd
+            uint32  freezingTimeStart,
+            uint32  freezingTimeEnd
         );
 }
