@@ -2,7 +2,7 @@
 ## Requirements
 * [Node.js](https://nodejs.org) >= `15.x`
 * [Yarn](https://classic.yarnpkg.com) >= `1.22.x`
-* [TON Solidity Compiler](https://github.com/tonlabs/TON-Solidity-Compiler) = `0.41`
+* [TON Solidity Compiler](https://github.com/tonlabs/TON-Solidity-Compiler) = `0.42`
 * [TVM linker](https://github.com/tonlabs/TVM-linker) >= `0.3.x`
 * [Free TON Development Environment](https://github.com/tonlabs/tondev) >= `0.4.x`
 
