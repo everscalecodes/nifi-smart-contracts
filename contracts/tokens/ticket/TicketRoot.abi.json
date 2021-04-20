@@ -65,7 +65,7 @@
 			]
 		},
 		{
-			"name": "geHash",
+			"name": "getHash",
 			"inputs": [
 				{"name":"key","type":"uint128"}
 			],

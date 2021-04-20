@@ -182,7 +182,7 @@ contract TicketRoot is
      * Generates hash of secret key.
      * key ... uint128 hash of key.
      */
-    function geHash(uint128 key) public pure returns(uint128 hash) {
+    function getHash(uint128 key) public pure returns(uint128 hash) {
         TvmBuilder builder;
         builder.store(key);
         TvmCell cell = builder.toCell();
