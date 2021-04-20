@@ -207,6 +207,19 @@ contract TicketRoot is
     }
 
     /**
+     * Returns all user token ids.
+     */
+    function getTokensIds(address ownerAddress) public view returns(uint128[] ids) {
+        if (!_ids.exists(ownerAddress))
+            return ids;
+
+        mapping(uint128 => bool) ownerIds = _ids[ownerAddress];
+        for ((uint128 key, bool value) : ownerIds)
+            if (value)
+                ids.push(key);
+    }
+
+    /**
      * Generates pseudo random uint128 number.
      * key ... Pseudo random uint128 number.
      */

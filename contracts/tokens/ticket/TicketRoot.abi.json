@@ -79,6 +79,15 @@
 			]
 		},
 		{
+			"name": "getTokensIds",
+			"inputs": [
+				{"name":"ownerAddress","type":"address"}
+			],
+			"outputs": [
+				{"name":"ids","type":"uint128[]"}
+			]
+		},
+		{
 			"name": "getSecretKey",
 			"inputs": [
 			],
