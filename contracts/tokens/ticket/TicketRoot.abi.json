@@ -8,6 +8,7 @@
 				{"name":"manager","type":"address"},
 				{"name":"creationMinValue","type":"uint128"},
 				{"name":"creationFee","type":"uint128"},
+				{"name":"limit","type":"uint128"},
 				{"name":"freezingTimeStart","type":"uint32"},
 				{"name":"freezingTimeEnd","type":"uint32"},
 				{"name":"name","type":"bytes"},

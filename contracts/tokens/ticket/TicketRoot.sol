@@ -15,6 +15,7 @@ import "interfaces/ITicketRoot.sol";
  *     1001 - Manager address can't be null
  *
  *     2000 - Method for token only
+ *     2001 - Limit is over
  */
 contract TicketRoot is
     Root,
@@ -27,8 +28,9 @@ contract TicketRoot is
     /*************
      * VARIABLES *
      *************/
-    uint32 private _freezingTimeStart;
-    uint32 private _freezingTimeEnd;
+    uint128 private _limit;
+    uint32  private _freezingTimeStart;
+    uint32  private _freezingTimeEnd;
     mapping(address => mapping(uint128 => bool)) _ids;
 
 
@@ -42,25 +44,32 @@ contract TicketRoot is
         _;
     }
 
+    modifier canCreateTicket() {
+        require(_totalSupply < _limit, 2001, "Limit is over");
+        _;
+    }
+
 
 
     /***************
      * CONSTRUCTOR *
      ***************/
     /**
-     * manager ............ Contract that governs token contract.
-     * creationMinValue ... The minimum value that needs to be sent to the root to create a token.
-     * creationFee ........ Payment for the work of the contract, plus money for the developers.
+     * manager ............. Contract that governs token contract.
+     * creationMinValue .... The minimum value that needs to be sent to the root to create a token.
+     * creationFee ......... Payment for the work of the contract, plus money for the developers.
+     * limit ............... Maximum count of ticket.
      * freezingTimeStart ... UNIX time. Start of time when the owner cannot be changed.
      * freezingTimeEnd ..... UNIX time. End of time when the owner cannot be changed.
-     * name ............... UTF8-encoded name of token. e.g. "CryptoKitties"
-     * symbol ............. UTF8-encoded symbol of token. e.g. "CK"
-     * tokenCode .......... Code of token contract.
+     * name ................ UTF8-encoded name of token. e.g. "CryptoKitties"
+     * symbol .............. UTF8-encoded symbol of token. e.g. "CK"
+     * tokenCode ........... Code of token contract.
      */
     constructor(
         address manager,
         uint128 creationMinValue,
         uint128 creationFee,
+        uint128 limit,
         uint32  freezingTimeStart,
         uint32  freezingTimeEnd,
         string  name,
@@ -72,6 +81,7 @@ contract TicketRoot is
         RootManaged(manager)
         RootManagedCreationFee(creationMinValue, creationFee)
     {
+        _limit = limit;
         _freezingTimeStart = freezingTimeStart;
         _freezingTimeEnd = freezingTimeEnd;
     }
@@ -90,6 +100,7 @@ contract TicketRoot is
     function create(address ownerAddress, uint128 hash)
         override
         external
+        canCreateTicket
         creationPaymentIsEnough
         returns(
             address addr
@@ -168,7 +179,6 @@ contract TicketRoot is
         return address(tvm.hash(stateInit));
     }
 
-
     /**
      * Generates pseudo random uint128 number.
      * key ... Pseudo random uint128 number.
@@ -188,6 +198,4 @@ contract TicketRoot is
         TvmCell cell = builder.toCell();
         return uint128(tvm.hash(cell) % (1 << 128));
     }
-
-    // TODO get token from map
 }
