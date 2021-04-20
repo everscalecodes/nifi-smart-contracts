@@ -156,11 +156,38 @@ contract TicketRoot is
         return{value: 0, bounce: false, flag: 64} getTokenAddress(id);
     }
 
+    /**
+     * Returns ticket info.
+     * limit ............... Maximum count of ticket.
+     * freezingTimeStart ... UNIX time. Start of time when the owner cannot be changed.
+     * freezingTimeEnd ..... UNIX time. End of time when the owner cannot be changed.
+     */
+    function receiveTicketInfo() override external view responsible returns(
+            uint128 limit,
+            uint32 freezingTimeStart,
+            uint32 freezingTimeEnd
+        )
+    {
+        return{value: 0, bounce: false, flag: 64} getTicketInfo();
+    }
+
 
 
     /***********
      * GETTERS *
      ***********/
+    /**
+     * Returns ticket info.
+     * limit ............... Maximum count of ticket.
+     * freezingTimeStart ... UNIX time. Start of time when the owner cannot be changed.
+     * freezingTimeEnd ..... UNIX time. End of time when the owner cannot be changed.
+     */
+    function getTicketInfo() public view returns(uint128 limit, uint32 freezingTimeStart, uint32 freezingTimeEnd) {
+        limit = _limit;
+        freezingTimeStart = _freezingTimeStart;
+        freezingTimeEnd = _freezingTimeEnd;
+    }
+
     /**
      * Returns the address of the token contract calculated by id.
      * id ..... Id of token.

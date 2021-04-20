@@ -49,6 +49,27 @@
 			]
 		},
 		{
+			"name": "receiveTicketInfo",
+			"inputs": [
+				{"name":"_answer_id","type":"uint32"}
+			],
+			"outputs": [
+				{"name":"limit","type":"uint128"},
+				{"name":"freezingTimeStart","type":"uint32"},
+				{"name":"freezingTimeEnd","type":"uint32"}
+			]
+		},
+		{
+			"name": "getTicketInfo",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"limit","type":"uint128"},
+				{"name":"freezingTimeStart","type":"uint32"},
+				{"name":"freezingTimeEnd","type":"uint32"}
+			]
+		},
+		{
 			"name": "getTokenAddress",
 			"inputs": [
 				{"name":"id","type":"uint128"}
