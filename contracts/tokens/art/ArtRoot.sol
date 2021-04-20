@@ -20,8 +20,8 @@ contract ArtRoot is Root, RootManaged, RootManagedCreationFee, RootManagedWithdr
         address manager,
         uint128 creationMinValue,
         uint128 creationFee,
-        string name,
-        string symbol,
+        string  name,
+        string  symbol,
         TvmCell tokenCode
     )
         public
