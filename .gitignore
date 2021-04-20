@@ -6,11 +6,13 @@ node_modules
 
 # Contracts
 contracts/**/*.code
+contracts/**/*.decode
 contracts/**/*.conf.json
 contracts/**/*.keys.json
 
 # Test contracts
 common/contracts/**/*.code
+common/contracts/**/*.decode
 common/contracts/**/*.conf.json
 common/contracts/**/*.keys.json
 
