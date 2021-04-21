@@ -99,7 +99,6 @@ abstract contract Token is Accept, AddressValidator, IToken {
         public
         onlyRoot
         addressIsNotNull(manager)
-        unlockTimeIsValid(managerUnlockTime)
         accept
     {
         _manager = manager;
