@@ -36,12 +36,12 @@ export default {
 
             /**
              * Giver address.
-             * @see https://github.com/tonlabs/tonos-se/tree/feature/dev-giver/contracts
+             * @see https://github.com/tonlabs/tonos-se/tree/master/contracts
              * Examples:
-             *     '0:b5e9240fc2d2f1ff8cbb1d1dee7fb7cae155e5f6320e585fcc685698994a19a5'
+             *     '0:841288ed3b55d9cdafa806807f02a0ae0c169aa5edfe88a789a6482429756a94',
              *     '0:7777777777777777777777777777777777777777777777777777777777777777'
              */
-            giver: '0:b5e9240fc2d2f1ff8cbb1d1dee7fb7cae155e5f6320e585fcc685698994a19a5',
+            giver: '0:841288ed3b55d9cdafa806807f02a0ae0c169aa5edfe88a789a6482429756a94',
 
             /**
              * How long to wait and result of call or deployment from local node in milliseconds
