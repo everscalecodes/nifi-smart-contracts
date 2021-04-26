@@ -15,3 +15,7 @@ const make:Make = new Make({
     ]
 })
 make.run()
+//
+// import Ton from "../../common/classes/utils/Ton";
+//
+// console.log(Ton.stringToHex('T'))
