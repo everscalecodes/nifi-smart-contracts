@@ -2,7 +2,7 @@
 ## Requirements
 * Check requirements in [INSTALLATION](INSTALLATION.md).
 * Run local node.
-* Set up `net.test.url` and `net.test.timeout` in `config.ts`.
+* Set up `net.test.url` and `net.test.timeout` in `config.template.ts`.
   * `net.test.timeout` is too small will crash tests.
   * `net.test.timeout` large value increases execution time.
 
