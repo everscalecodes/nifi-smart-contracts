@@ -1,5 +1,5 @@
 # Config
-configs/config.template.ts
+configs/config.ts
 
 # Dependency directory
 node_modules
