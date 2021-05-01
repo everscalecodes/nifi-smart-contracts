@@ -5,6 +5,7 @@ import Ton from '../common/classes/utils/Ton'
 import SafeMultisigWallet from '../common/classes/SafeMultisigWallet'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import artRootData from '../contracts/tokens/art/ArtRoot'
+import TonKeysFileReader from "../common/classes/utils/TonKeysFileReader";
 
 Ton.url = config.net.test.url
 Ton.timeout = config.net.test.timeout
@@ -14,7 +15,8 @@ it('Valid', async done => {
 
     const multisigKeys: KeyPair = await Ton.randomKeys()
     const multisig: SafeMultisigWallet = new SafeMultisigWallet(multisigKeys)
-    const giverContract: GiverV2 = new GiverV2(config.net.test.giverKeys)
+    const giverKeys: KeyPair = TonKeysFileReader.read(config.net.test.giverKeys)
+    const giverContract: GiverV2 = new GiverV2(giverKeys)
     const artRoot: ArtRoot = new ArtRoot(await Ton.randomKeys())
 
     await giverContract.sendTransaction(await multisig.calculateAddress(), 10_000_000_000)
