@@ -21,7 +21,7 @@ it('Valid', async done => {
     await multisig.deploy([Ton.x0(multisigKeys.public)], 1)
 
     await giverContract.sendGrams(10_000_000_000, await artRoot.calculateAddress())
-    const artRootDeployResult: boolean = await artRoot.deploy(
+    await artRoot.deploy(
         manager,
         1_000_000_000,
         100_000_000,
