@@ -21,8 +21,8 @@ export default {
             /**
              * How long to wait and result of call or deployment from local node in milliseconds
              * Examples:
-             *    3000
-             *    5000
+             *     3000
+             *     5000
              */
             timeout: 3000
         }
