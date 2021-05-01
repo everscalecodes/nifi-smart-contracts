@@ -2,10 +2,11 @@ import Contract from './base/Contract'
 import ArtRootContracts from '../../contracts/tokens/art/ArtRoot'
 import ArtTokenContract from '../../contracts/tokens/art/ArtToken'
 import {DecodedMessageBody, KeyPair} from '@tonclient/core/dist/modules'
+import KitInterface from './utils/interface/KitInterface'
 
 export default class ArtRoot extends Contract {
-    public constructor(keys: KeyPair) {
-        super({
+    public constructor(kit: KitInterface, keys: KeyPair) {
+        super(kit, {
             abi: ArtRootContracts.abi,
             tvc: ArtRootContracts.tvc,
             initialData: {},

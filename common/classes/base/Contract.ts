@@ -12,12 +12,13 @@ import {
     Signer
 } from '@tonclient/core/dist/modules'
 import {TonClient} from '@tonclient/core'
-import Ton from '../utils/Ton'
 import ContractConfig from './interfaces/ContractConfig'
 import DeployedContractConfig from './interfaces/DeployedContractConfig'
+import KitInterface from '../utils/interface/KitInterface'
 
 export default class Contract {
     private readonly _client: TonClient
+    private readonly _timeout: number
     private readonly _abi: Abi
     private readonly _initialData: Object
     private readonly _keys: KeyPair
@@ -31,23 +32,29 @@ export default class Contract {
      * PUBLIC *
      **********/
     /**
+     * @param kit {KitInterface} Example:
+     *     {
+     *         url: 'http://localhost:8080'
+     *         timeout: 3000
+     *     }
      * @param config {ContractConfig | DeployedContractConfig} Examples:
      *     // Already deployment contract
      *     {
-     *         abi: {"ABI version": 2, '...'}
+     *         abi: {'ABI version': 2, '...'}
      *         address: '0:7777777777777777777777777777777777777777777777777777777777777777'
      *     }
      *
      *     // New contract
      *     {
-     *         abi: {"ABI version": 2, '...'}
+     *         abi: {'ABI version': 2, '...'}
      *         initialData: {name: 'bot'}
      *         keys: {public: '...', secret: '...'}
      *         tvc: 'te6ccgECLAEAB6oAAgE0 ...'
      *     }
      */
-    public constructor(config: ContractConfig | DeployedContractConfig) {
-        this._client = Ton.client
+    public constructor(kit: KitInterface, config: ContractConfig | DeployedContractConfig) {
+        this._client = kit.client
+        this._timeout = kit.timeout
         this._abi = Contract._getAbi(config.abi)
         this._initialData = config.initialData
         this._tvc = config.tvc
@@ -59,8 +66,9 @@ export default class Contract {
     /**
      * Called once. Use if you want to know the address of the contract before deployment.
      * Example:
-     *     const keys: KeyPair = await Ton.client.crypto.generate_random_sign_keys()
-     *     const root: ArtRoot = new ArtRoot(keys)
+     *     const kit: KitInterface = Ton.kit.getKit(config.net.test)
+     *     const keys: KeyPair = await Ton.keys.random(kit.client)
+     *     const root: ArtRoot = new ArtRoot(kit, keys)
      *     const rootAddress: string = await root.calculateAddress()
      */
     public async calculateAddress(): Promise<string> {
@@ -80,8 +88,9 @@ export default class Contract {
 
     /**
      * Use this if you want to wait for a transaction from one contract to another. Example:
-     *     const sender: SenderContract = new SenderContract()
-     *     const receiver: ReceiverContract = new ReceiverContract()
+     *     const kit: KitInterface = Ton.kit.getKit(config.net.test)
+     *     const sender: SenderContract = new SenderContract(kit)
+     *     const receiver: ReceiverContract = new ReceiverContract(kit)
      *
      *     // Deployment here...
      *
@@ -93,7 +102,7 @@ export default class Contract {
      *     5000
      */
     public async waitForTransaction(timeout?: number): Promise<boolean> {
-        timeout = timeout ?? Ton.timeout
+        timeout = timeout ?? this._timeout
         try {
             const queryCollectionResult: ResultOfQueryCollection = await this._client.net.wait_for_collection({
                 collection: 'accounts',
