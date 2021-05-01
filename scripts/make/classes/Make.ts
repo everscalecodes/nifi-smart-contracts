@@ -1,20 +1,12 @@
-import path from 'path'
-import {exec, ExecException} from 'child_process'
-import {red, green} from 'colors'
-import root from '../../../root'
-import config from '../../../configs/config'
-import TaskInterface from './interfaces/TaskInterface'
+import {TonClient} from '@tonclient/core'
+import {libNode} from '@tonclient/lib-node'
 import MakeConfigInterface from './interfaces/MakeConfigInterface'
-import MakeJSON from './MakeJSON'
-
-enum TaskType {
-    COMPILE = 'compile',
-    DECODE = 'decode'
-}
+import root from '../../../root'
+import path from 'path'
+import {consoleTerminal, runCommand} from 'tondev'
 
 export default class Make {
-    private readonly _tasks: TaskInterface[]
-    private _taskIndex: number
+    private _config: MakeConfigInterface
 
     /**
      * @param config {MakeConfigInterface} Config contains relative paths without '.sol' and '.tvc' extension. Example:
@@ -23,112 +15,60 @@ export default class Make {
      *             'contracts/tokens/random/RandomToken',
      *             'contracts/tokens/random/RandomRoot
      *         ],
-     *         decode: [
+     *         wrap: [
      *             'tests/contracts/SafeMultisigWallet'
      *         ]
      *     }
      */
     public constructor(config: MakeConfigInterface) {
-        this._tasks = []
-        this._taskIndex = 0
-        this._read(config.compile, TaskType.COMPILE)
-        this._read(config.decode, TaskType.DECODE)
-    }
-
-    /**
-     * Read paths and create tasks.
-     * @param relativePaths {string[]} Array of relative path of *.sol and *.tvc files to compile.
-     * Paths without '.sol' and '*.tvc' extension. Example:
-     *     ['contracts/tokens/random/RandomToken', 'contracts/tokens/random/RandomRoot']
-     * @param type {TaskType} Variables:
-     *     'compile'
-     *     'decode'
-     * @private
-     */
-    private _read(relativePaths: string[] = [], type: TaskType): void {
-        for (let i: number = 0; i < relativePaths.length; i++) {
-            const relativePath: string = relativePaths[i]
-            const absolutePath: string = path.resolve(root, relativePath)
-            const directory: string = path.resolve(root, path.dirname(relativePath))
-            const fileName: string = path.basename(relativePath)
-            const commands: string = Make._generateCommands(directory, fileName, type)
-            this._tasks.push({
-                commands: commands,
-                relativePath: relativePath,
-                absolutePath: absolutePath
-            })
-        }
-    }
-
-    /**
-     * @param directory {string} Example:
-     *     'contracts/tokens/random'
-     * @param fileName {string} Example:
-     *     'RandomToken'
-     * @param type {TaskType} Example:
-     *     'compile'
-     * @return {string} Example:
-     *     `cd contracts/tokens/random
-     *     solc RandomToken.sol
-     *     tvm_linker compile RandomToken.code -o RandomToken.tvc --lib lib/stdlib_sol.tvm
-     *     tvm_linker decode --tvc RandomToken.tvc > RandomToken.decode`
-     */
-    private static _generateCommands(directory: string, fileName: string, type: TaskType): string {
-        const compiler: string = config.make.compiler
-        const tvmLinker: string = config.make.tonVirtualMachineLinker
-        const compilerLibrary: string = config.make.compilerLibrary
-        return (type === TaskType.COMPILE)
-            ?
-                `cd ${directory}
-                ${compiler} ${fileName}.sol
-                ${tvmLinker} compile ${fileName}.code -o ${fileName}.tvc --lib ${compilerLibrary}
-                ${tvmLinker} decode --tvc ${fileName}.tvc > ${fileName}.decode`
-            :
-                `cd ${directory}
-                ${tvmLinker} decode --tvc ${fileName}.tvc > ${fileName}.decode`
+        this._config = config
+        TonClient.useBinaryLibrary(libNode)
     }
 
     /**
      * Execute current task.
      */
-    public run(): void {
-        exec(this._currentTask.commands, this._onExecComplete.bind(this))
-    }
+    public async run(): Promise<void> {
+        await runCommand(consoleTerminal, 'sol set -e es6', {
+            compiler: '0.42.0',
+            linker: '0.3.0'
+        })
 
-    /**
-     * Returns current task.
-     * @private
-     */
-    private get _currentTask(): TaskInterface {
-        return this._tasks[this._taskIndex]
-    }
-
-    /**
-     * Exec callback.
-     * @param error {ExecException | null} ExecException if commands executed not correctly.
-     * @param standardOutput {string} stdout
-     * @param standardError {string} stderr
-     */
-    private _onExecComplete(error: ExecException | null, standardOutput: string, standardError: string): void {
-        if (error)
-            console.error(error)
-        else if (standardError.length)
-            console.error(red(standardError))
-        else {
-            MakeJSON.generate(this._currentTask.absolutePath)
-            console.log(`${green('✓')} ${this._currentTask.relativePath}`)
-            this._tryRunNextTask()
+        const compile: string[] = this._config.compile
+        for (let i = 0; i < compile.length; i++) {
+            const file = compile[i]
+            await Make._compile(file)
+            await Make._wrap(file)
         }
+
+        const wrap: string[] = this._config.wrap
+        for (let i = 0; i < wrap.length; i++)
+            await Make._wrap(wrap[i])
     }
 
     /**
-     * Call run() again for next task if tasks is not over.
+     * Compile *.sol file.
+     * @param file {string} Example:
+     *     '/home/user/Project/nifi/contracts/Root.sol'
      * @private
      */
-    private _tryRunNextTask(): void {
-        if (this._taskIndex >= (this._tasks.length - 1))
-            return
-        this._taskIndex++
-        this.run()
+    private static async _compile(file: string): Promise<void> {
+        await runCommand(consoleTerminal, 'sol compile', {
+            file: path.resolve(root, `${file}.sol`)
+        })
+    }
+
+    /**
+     * Wrat *.abi.json file.
+     * @param file {string} Example:
+     *     '/home/user/Project/nifi/contracts/Root.abi.json'
+     * @private
+     */
+    private static async _wrap(file: string): Promise<void> {
+        await runCommand(consoleTerminal, 'js wrap', {
+            file: path.resolve(root, `${file}.abi.json`),
+            export: 'es6-default',
+            output: `${path.basename(file)}.js`
+        })
     }
 }
