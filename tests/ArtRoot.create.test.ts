@@ -1,5 +1,5 @@
 import config from '../configs/config'
-import LocalNodeGiver from '../common/classes/LocalNodeGiver'
+import GiverV2 from '../common/classes/GiverV2'
 import ArtRoot from '../common/classes/ArtRoot'
 import Ton from '../common/classes/utils/Ton'
 import SafeMultisigWallet from '../common/classes/SafeMultisigWallet'
@@ -14,13 +14,13 @@ it('Valid', async done => {
 
     const multisigKeys: KeyPair = await Ton.randomKeys()
     const multisig: SafeMultisigWallet = new SafeMultisigWallet(multisigKeys)
-    const giverContract: LocalNodeGiver = new LocalNodeGiver()
+    const giverContract: GiverV2 = new GiverV2(config.net.test.giverKeys)
     const artRoot: ArtRoot = new ArtRoot(await Ton.randomKeys())
 
-    await giverContract.sendGrams(10_000_000_000, await multisig.calculateAddress())
+    await giverContract.sendTransaction(await multisig.calculateAddress(), 10_000_000_000)
     await multisig.deploy([Ton.x0(multisigKeys.public)], 1)
 
-    await giverContract.sendGrams(10_000_000_000, await artRoot.calculateAddress())
+    await giverContract.sendTransaction(await artRoot.calculateAddress(), 10_000_000_000)
     await artRoot.deploy(
         manager,
         1_000_000_000,

@@ -10,13 +10,13 @@ export default {
             url: 'http://localhost:8080',
 
             /**
-             * Giver address.
+             * Giver keys.
              * @see https://github.com/tonlabs/tonos-se/tree/master/contracts
              * Examples:
-             *     '0:b5e9240fc2d2f1ff8cbb1d1dee7fb7cae155e5f6320e585fcc685698994a19a5',
-             *     '0:7777777777777777777777777777777777777777777777777777777777777777'
+             *     __dirname + 'common/keys/GiverV2.keys.json'
+             *     '/home/user/keys/GiverV2.keys.json'
              */
-            giver: '0:b5e9240fc2d2f1ff8cbb1d1dee7fb7cae155e5f6320e585fcc685698994a19a5',
+            giverKeys: __dirname + '/../common/keys/GiverV2.keys.json',
 
             /**
              * How long to wait and result of call or deployment from local node in milliseconds
