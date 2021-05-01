@@ -3,7 +3,7 @@ import Contract from './base/Contract'
 import config from '../../configs/config'
 import giverABI from '../contracts/giver.abi.json'
 
-export default class LocalNodeGiverContract extends Contract {
+export default class LocalNodeGiver extends Contract {
     public constructor() {
         super({
             abi: giverABI,

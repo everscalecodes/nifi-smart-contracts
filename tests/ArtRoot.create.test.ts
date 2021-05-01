@@ -1,8 +1,8 @@
 import config from '../configs/config'
-import LocalNodeGiverContract from '../common/classes/LocalNodeGiverContract'
-import ArtRootContract from '../common/classes/ArtRootContract'
+import LocalNodeGiver from '../common/classes/LocalNodeGiver'
+import ArtRoot from '../common/classes/ArtRoot'
 import Ton from '../common/classes/utils/Ton'
-import SafeMultisigWalletContract from '../common/classes/SafeMultisigWalletContract'
+import SafeMultisigWallet from '../common/classes/SafeMultisigWallet'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import artRootData from '../contracts/tokens/art/ArtRoot'
 
@@ -13,9 +13,9 @@ it('Valid', async done => {
     const manager: string = '0:0000000000000000000000000000000000000000000000000000000000000001'
 
     const multisigKeys: KeyPair = await Ton.randomKeys()
-    const multisig: SafeMultisigWalletContract = new SafeMultisigWalletContract(multisigKeys)
-    const giverContract: LocalNodeGiverContract = new LocalNodeGiverContract()
-    const artRoot: ArtRootContract = new ArtRootContract(await Ton.randomKeys())
+    const multisig: SafeMultisigWallet = new SafeMultisigWallet(multisigKeys)
+    const giverContract: LocalNodeGiver = new LocalNodeGiver()
+    const artRoot: ArtRoot = new ArtRoot(await Ton.randomKeys())
 
     await giverContract.sendGrams(10_000_000_000, await multisig.calculateAddress())
     await multisig.deploy([Ton.x0(multisigKeys.public)], 1)

@@ -3,7 +3,7 @@ import ArtRootContracts from '../../contracts/tokens/art/ArtRoot'
 import ArtToken from '../../contracts/tokens/art/ArtToken'
 import {DecodedMessageBody, KeyPair} from '@tonclient/core/dist/modules'
 
-export default class ArtRootContract extends Contract {
+export default class ArtRoot extends Contract {
     public constructor(keys: KeyPair) {
         super({
             abi: ArtRootContracts.abi,

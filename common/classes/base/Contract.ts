@@ -60,7 +60,7 @@ export default class Contract {
      * Called once. Use if you want to know the address of the contract before deployment.
      * Example:
      *     const keys: KeyPair = await Ton.client.crypto.generate_random_sign_keys()
-     *     const root: ArtRootContract = new ArtRootContract(keys)
+     *     const root: ArtRoot = new ArtRoot(keys)
      *     const rootAddress: string = await root.calculateAddress()
      */
     public async calculateAddress(): Promise<string> {

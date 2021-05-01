@@ -2,7 +2,7 @@ import Contract from './base/Contract'
 import safeMultisigWalletData from '../contracts/SafeMultisigWallet/SafeMultisigWallet'
 import {AbiContract, KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist/modules'
 
-export default class SafeMultisigWalletContract extends Contract {
+export default class SafeMultisigWallet extends Contract {
     public constructor(keys: KeyPair) {
         super({
             abi: safeMultisigWalletData.abi,
