@@ -68,7 +68,7 @@ export default class Make {
         await runCommand(consoleTerminal, 'js wrap', {
             file: path.resolve(root, `${file}.abi.json`),
             export: 'es6-default',
-            output: `${path.basename(file)}.js`
+            output: `${path.basename(file)}.ts`
         })
     }
 }

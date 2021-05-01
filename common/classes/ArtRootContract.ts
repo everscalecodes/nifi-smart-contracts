@@ -1,13 +1,13 @@
 import Contract from './base/Contract'
-import artRootData from '../../contracts/tokens/art/ArtRoot.json'
-import artTokenData from '../../contracts/tokens/art/ArtToken.json'
+import ArtRootContracts from '../../contracts/tokens/art/ArtRoot'
+import ArtToken from '../../contracts/tokens/art/ArtToken'
 import {DecodedMessageBody, KeyPair} from '@tonclient/core/dist/modules'
 
 export default class ArtRootContract extends Contract {
     public constructor(keys: KeyPair) {
         super({
-            abi: artRootData.abi,
-            tvc: artRootData.tvc,
+            abi: ArtRootContracts.abi,
+            tvc: ArtRootContracts.tvc,
             initialData: {},
             keys: keys
         })
@@ -31,7 +31,7 @@ export default class ArtRootContract extends Contract {
             creationFee: creationFee,
             name: name,
             symbol: symbol,
-            tokenCode: artTokenData.code
+            tokenCode: ArtToken.code
         })
     }
 

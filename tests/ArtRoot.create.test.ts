@@ -4,7 +4,7 @@ import ArtRootContract from '../common/classes/ArtRootContract'
 import Ton from '../common/classes/utils/Ton'
 import SafeMultisigWalletContract from '../common/classes/SafeMultisigWalletContract'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import artRootData from '../contracts/tokens/art/ArtRoot.json'
+import artRootData from '../contracts/tokens/art/ArtRoot'
 
 Ton.url = config.net.test.url
 Ton.timeout = config.net.test.timeout
