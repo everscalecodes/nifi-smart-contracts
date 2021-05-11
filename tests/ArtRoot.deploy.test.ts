@@ -1,20 +1,20 @@
 import config from '../configs/config'
-import GiverV2 from '../common/classes/GiverV2'
-import ArtRoot from '../common/classes/ArtRoot'
-import Ton from '../common/classes/utils/Ton'
+import ArtRoot from '../contracts/ArtRoot'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import TonKeysFileReader from '../common/classes/utils/TonKeysFileReader'
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import KitInterface from '../common/classes/utils/interface/KitInterface'
+import TonKeysFile from '../library/ton/utils/node/TonKeysFile'
+import {Ton} from '../library'
+import KitInterface from '../library/ton/utils/interfaces/KitInterface'
+import GiverV2 from '../library/ton/contracts/GiverV2'
 
 TonClient.useBinaryLibrary(libNode)
-const kit: KitInterface = Ton.kit.getKit(config.net.test)
+const kit: KitInterface = Ton.kit.create(config.net.test)
 
 it('Valid', async done => {
     const manager: string = '0:0000000000000000000000000000000000000000000000000000000000000001'
 
-    const giverKeys: KeyPair = TonKeysFileReader.read(config.net.test.giverKeys)
+    const giverKeys: KeyPair = TonKeysFile.read(config.net.test.keys.giver)
     const giverContract: GiverV2 = new GiverV2(kit, giverKeys)
     const artRoot: ArtRoot = new ArtRoot(kit, await Ton.keys.random(kit.client))
 
@@ -23,8 +23,8 @@ it('Valid', async done => {
         manager,
         1_000_000_000,
         100_000_000,
-        Ton.string.stringToHex('Art'),
-        Ton.string.stringToHex('ART')
+        Ton.hex.string('Art'),
+        Ton.hex.string('ART')
     )
 
     expect(artRootDeployResult).toBeTruthy()

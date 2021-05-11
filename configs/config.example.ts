@@ -2,21 +2,44 @@ export default {
     net: {
         test: {
             /**
-             * Local network URL
+             * Network URL without port.
              * Examples:
-             *     'http://localhost:8080'
-             *     'http://0.0.0.0:80'
+             *     'http://localhost'
+             *     'http://0.0.0.0
              */
-            url: 'http://localhost:8080',
+            url: 'http://localhost',
 
             /**
-             * Giver keys.
-             * @see https://github.com/tonlabs/tonos-se/tree/master/contracts
+             * Network port.
              * Examples:
-             *     __dirname + 'common/keys/GiverV2.keys.json'
-             *     '/home/user/keys/GiverV2.keys.json'
+             *     '8080'
+             *     '80'
              */
-            giverKeys: __dirname + '/../common/keys/GiverV2.keys.json',
+            port: '8080',
+
+            /**
+             * Version of test node. Actual for testing on local node. Run `tondev se version` to view options.
+             * @see https://github.com/tonlabs/tondev
+             * Examples:
+             *     '0.27.2'
+             *     'latest'
+             */
+            version: '0.27.2',
+
+            /**
+             * IMPORTANT!!!
+             * Dont use default path. Store keys in encrypted directory or key storage.
+             * For directory encryption on linux use CryFS or any other solution.
+             */
+            keys: {
+                /**
+                 * Absolute path to giver keys file.
+                 * Examples:
+                 *     __dirname + '/../library/keys/GiverV2.se.keys.json'
+                 *     '/home/user/keys/GiverV2.keys.json'
+                 */
+                giver: __dirname + '/../library/keys/GiverV2.se.keys.json'
+            },
 
             /**
              * How long to wait and result of call or deployment from local node in milliseconds
@@ -25,6 +48,78 @@ export default {
              *     5000
              */
             timeout: 3000
+        },
+        deploy: {
+            /**
+             * Network URL without port.
+             * Examples:
+             *     'http://localhost'
+             *     'http://0.0.0.0
+             */
+            url: 'http://localhost',
+
+            /**
+             * Network port.
+             * Examples:
+             *     '8080'
+             *     '80'
+             */
+            port: '8080',
+
+            /**
+             * Giver and wallet keys
+             *
+             * IMPORTANT!!!
+             * Dont use default path. Store keys in encrypted directory or key storage.
+             * For directory encryption on linux use CryFS or any other solution.
+             */
+            keys: {
+                /**
+                 * Absolute path to giver keys file.
+                 * Examples:
+                 *     __dirname + '/../library/keys/GiverV2.se.keys.json'
+                 *     '/home/user/keys/GiverV2.keys.json'
+                 */
+                giver: __dirname + '/../library/keys/GiverV2.se.keys.json',
+
+                /**
+                 * Absolute path to SafeMultisigWallet keys file.
+                 * Examples:
+                 *     __dirname + '/../keys/SafeMultisigWallet.keys.json'
+                 *     '/home/user/keys/SafeMultisigWallet.keys.json'
+                 */
+                wallet: __dirname + '/../keys/SafeMultisigWallet.keys.json',
+            },
+
+            /**
+             * Contracts key files and deployment parameters.
+             */
+            contracts: {
+                artRoot: {
+                    keyFile: __dirname + '/../keys/ArtRoot.keys.json',
+                    manager: '0:ea3bd7dede82374278c045193ff39894abea44ef1eae2a3cab85c6d07f406066',
+                    creationMinValue: 200_000_000,
+                    creationFee: 50_000_000,
+                    name: 'Art',
+                    symbol: 'ART'
+                }
+            },
+
+            /**
+             * How long to wait and result of call or deployment from local node in milliseconds
+             * Examples:
+             *     3000
+             *     5000
+             */
+            timeout: 30000,
+
+            /**
+             * One or more BCP 47 extension sequences or `undefined`
+             * Examples:
+             *     'RU'
+             *     'EN'
+             */
+            locale: undefined
         }
     }
 }

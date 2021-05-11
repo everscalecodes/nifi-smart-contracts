@@ -64,6 +64,7 @@ function registerName() oneTon {
 ## Errors
 ### If the class can return errors, write them at the beginning of a class
 ```sol
+/**
  * Error codes
  *     100 - Method for the manager only
  *     101 - Public key cannot be null
