@@ -1,4 +1,5 @@
 pragma ton-solidity ^0.42.0;
+pragma AbiHeader pubkey;
 
 import "../../abstract/TokenPublicKey.sol";
 import "interfaces/IArtToken.sol";
