@@ -9,14 +9,13 @@ import TonKeysFileReader from '../common/classes/utils/TonKeysFileReader'
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import KitInterface from '../common/classes/utils/interface/KitInterface'
-import delay from '../common/classes/utils/delay'
 import ArtToken, {ArtInfo} from '../common/classes/ArtToken'
 
 TonClient.useBinaryLibrary(libNode)
 const kit: KitInterface = Ton.kit.getKit(config.net.test)
 
 it('Valid', async done => {
-    const hash: string = '0x0000000000000000000000000000000000000000000000000000000012345678'
+    const newHash: string = '0x0000000000000000000000000000000000000000000000000000001234567890'
 
     const multisigKeys: KeyPair = await Ton.keys.random(kit.client)
     const multisig: SafeMultisigWallet = new SafeMultisigWallet(kit, multisigKeys)
@@ -51,11 +50,12 @@ it('Valid', async done => {
             managerUnlockTime: 0,
             creator: Ton.string.x0(multisigKeys.public),
             creatorFees: 0,
-            hash: hash
+            hash: '0x0000000000000000000000000000000000000000000000000000000000000000'
         },
         multisigKeys
     )
-    expect((await artToken.getArtInfo()).hash).toBe(hash)
+    await artToken.addHash(newHash, multisigKeys)
+    expect((await artToken.getArtInfo()).hash).toBe(newHash)
 
     done()
 }, 30000)
