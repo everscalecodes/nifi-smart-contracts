@@ -32,7 +32,8 @@ async function run(): Promise<void> {
     const balance: number = parseInt(await artRoot.getBalance())
     if (balance === 0) {
         await TerminalContractInfo.log('SENDING...')
-        await giver.sendTransaction(await artRoot.calculateAddress(), 100_000_000)
+        await giver.sendTransaction(await artRoot.calculateAddress(), config.net.deploy.contracts.artRoot.giverDeposit)
+        await artRoot.waitForTransaction()
         await TerminalContractInfo.log(colors.green('SENT'))
         await TerminalContractInfo.log()
         await TerminalContractInfo.logAccount('Giver', giver, config.net.deploy.locale)
