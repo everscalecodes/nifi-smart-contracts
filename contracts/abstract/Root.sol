@@ -1,4 +1,4 @@
-pragma ton-solidity ^0.42.0;
+pragma ton-solidity ^0.43.0;
 
 import "interfaces/IRoot.sol";
 import "./modifiers/Accept.sol";

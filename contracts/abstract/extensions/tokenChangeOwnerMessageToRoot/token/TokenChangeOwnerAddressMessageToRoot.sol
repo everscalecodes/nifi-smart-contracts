@@ -1,4 +1,4 @@
-pragma ton-solidity ^0.42.0;
+pragma ton-solidity ^0.43.0;
 
 import "../root/interfaces/IRootTokenChangeOwnerAddress.sol";
 import "../../../TokenAddress.sol";

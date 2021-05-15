@@ -18,7 +18,7 @@ const make: Make = new Make({
         'library/ton/contracts/SafeMultisigWallet/SafeMultisigWallet',
         'library/ton/contracts/GiverV2/GiverV2'
     ],
-    compiler: '0.42.0',
+    compiler: '0.43.0',
     linker: '0.3.0'
 })
 make.run().then()

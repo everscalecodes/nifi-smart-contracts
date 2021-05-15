@@ -1,4 +1,4 @@
-pragma ton-solidity ^0.42.0;
+pragma ton-solidity ^0.43.0;
 pragma AbiHeader pubkey;
 
 import "../../abstract/TokenPublicKey.sol";
