@@ -11,7 +11,7 @@ const make: Make = new Make({
         'contracts/tokens/ticket/TicketToken',
         'contracts/tokens/ticket/TicketRoot',
 
-        'contracts/trade/TradeRoot',
+        'contracts/trade/DirectAuctionPublicKeyRoot',
         'contracts/trade/DirectAuctionPublicKey'
     ],
     wrap: [

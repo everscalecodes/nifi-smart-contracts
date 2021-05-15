@@ -1,4 +1,4 @@
-const TradeRootContract = {
+const DirectAuctionPublicKeyRootContract = {
     abi: {
         "ABI version": 2,
         "header": [
@@ -18,4 +18,4 @@ const TradeRootContract = {
     code: "te6ccgEBCQEA/AAEKP8Aiu1TIOMDIMD/4wIgwP7jAvILBwIBCAKKIds80wABn4ECANcYIPkBWPhC+RDyqN7TPwGOHfhDIbkgnzAg+COBA+iogggbd0Cgud6TIPhj4PI02DDTHwHbPPhHbvJ8BgMBOiLQ1wsDqTgA3CHHANwh1w0f8rwh3QHbPPhHbvJ8AwEUIIIQaLVfP7rjAgQCKjD4SG7jAPhG8nNx+GbR+ADbPH/4ZwYFACD4RvhD+ELIy//LP8sAye1UAGrtRNAg10nCAY4Q0//TP9MA0X/4aPhm+GP4Yo4Y9AVwAYBA9A7yvdcL//hicPhjcPhmf/ho4gEK9KQg9KEIAAA=",
     codeHash: "e07067f260e6290d42c9be7754c136ee2dfebd74e73b9c99f22d6793a2705735",
 };
-export default TradeRootContract;
+export default DirectAuctionPublicKeyRootContract;
