@@ -4,10 +4,15 @@ const make: Make = new Make({
     compile: [
         'contracts/tokens/random/RandomRoot',
         'contracts/tokens/random/RandomToken',
+
         'contracts/tokens/art/ArtRoot',
         'contracts/tokens/art/ArtToken',
+
         'contracts/tokens/ticket/TicketToken',
-        'contracts/tokens/ticket/TicketRoot'
+        'contracts/tokens/ticket/TicketRoot',
+
+        'contracts/trade/TradeRoot',
+        'contracts/trade/DirectAuctionPublicKey'
     ],
     wrap: [
         'library/ton/contracts/SafeMultisigWallet/SafeMultisigWallet',
