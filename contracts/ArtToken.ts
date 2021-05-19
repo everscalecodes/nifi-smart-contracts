@@ -1,5 +1,5 @@
 import ArtTokenContract from './tokens/art/ArtToken'
-import {DecodedMessageBody, KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist/modules'
+import {DecodedMessageBody, KeyPair} from '@tonclient/core/dist/modules'
 import KitInterface from '../library/ton/utils/interfaces/KitInterface'
 import Contract from '../library/ton/base/Contract'
 
