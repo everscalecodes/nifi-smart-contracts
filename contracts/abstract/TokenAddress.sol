@@ -1,4 +1,4 @@
-pragma ton-solidity ^0.43.0;
+pragma ton-solidity ^0.44.0;
 
 import "Token.sol";
 import "interfaces/ITokenAddress.sol";

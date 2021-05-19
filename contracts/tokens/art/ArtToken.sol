@@ -1,4 +1,4 @@
-pragma ton-solidity ^0.43.0;
+pragma ton-solidity ^0.44.0;
 pragma AbiHeader pubkey;
 
 import "../../abstract/extensions/tokenChangeOwnerEvent/token/TokenChangeOwnerAddressEvent.sol";
