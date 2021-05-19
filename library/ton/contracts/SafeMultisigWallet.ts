@@ -35,7 +35,7 @@ export default class SafeMultisigWallet extends Contract {
         value: number,
         bounce: boolean,
         flags: number,
-        abi: AbiContract,
+        abi: AbiContract | any, // Fix. AbiContract request `bigint` in `data.key` field but we have only `number`
         method: string,
         input: Object,
         keys: KeyPair
