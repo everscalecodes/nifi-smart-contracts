@@ -32,7 +32,7 @@ contract TicketToken is TokenAddress, TokenChangeOwnerAddressMessageToRoot, ITic
      * CONSTRUCTOR *
      ***************/
     /**
-     * ownerAddress ........ Address of token owner.
+     * owner ............... Address of token owner.
      * manager ............. Contract that governs this contract.
      * managerUnlockTime ... UNIX time. Time when the manager can be unlocked.
      * hash ................ Hash of secret code.
@@ -40,14 +40,14 @@ contract TicketToken is TokenAddress, TokenChangeOwnerAddressMessageToRoot, ITic
      * freezingTimeEnd ..... UNIX time. End of time when the owner cannot be changed.
      */
     constructor(
-        address ownerAddress,
+        address owner,
         address manager,
         uint32  managerUnlockTime,
         uint128 hash,
         uint32  freezingTimeStart,
         uint32  freezingTimeEnd
     ) public TokenAddress(
-            ownerAddress,
+            owner,
             manager,
             managerUnlockTime
         )
@@ -120,7 +120,7 @@ contract TicketToken is TokenAddress, TokenChangeOwnerAddressMessageToRoot, ITic
     /**
      * Revert() if owner or manager can't change owner address.
      */
-    function _canChangeOwnerAddress() override internal {
+    function _canChangeOwner() override internal {
         require(now < _freezingTimeStart || now > _freezingTimeEnd, 300, "Ticket is freezing");
     }
 }

@@ -1,15 +1,15 @@
 pragma ton-solidity ^0.43.0;
 pragma AbiHeader pubkey;
 
-import "../../abstract/TokenPublicKey.sol";
+import "../../abstract/extensions/tokenChangeOwnerEvent/token/TokenChangeOwnerAddressEvent.sol";
+import "../../abstract/TokenAddress.sol";
 import "interfaces/IArtToken.sol";
-import "../../abstract/extensions/tokenChangeOwnerEvent/token/TokenChangeOwnerEvent.sol";
 
-contract ArtToken is TokenPublicKey, TokenChangeOwnerEvent, IArtToken {
+contract ArtToken is TokenAddress, TokenChangeOwnerAddressEvent, IArtToken {
     /*************
      * VARIABLES *
      *************/
-    uint256   private _creator;
+    address   private _creator;
     uint32    private _creatorFees;
     uint256[] private _hashes;
 
@@ -19,23 +19,23 @@ contract ArtToken is TokenPublicKey, TokenChangeOwnerEvent, IArtToken {
      * CONSTRUCTOR *
      ***************/
     /**
-     * owner ............... Public key of token owner.
+     * owner ............... Address of token owner.
      * manager ............. Contract that governs this contract.
      * managerUnlockTime ... UNIX time. Time when the manager can be unlocked.
-     * creator ............. Public key of creator.
+     * creator ............. Address of creator.
      * creatorFees ......... Creator fee. e.g. 1 = 0.01%. 1 is minimum. 10_000 is maximum.
      * hash ................ Hash of data that associated with token.
      */
     constructor(
-        uint256 owner,
+        address owner,
         address manager,
         uint32  managerUnlockTime,
-        uint256 creator,
+        address creator,
         uint32  creatorFees,
         uint256 hash
     )
         public
-        TokenPublicKey(
+        TokenAddress(
             owner,
             manager,
             managerUnlockTime
@@ -53,13 +53,13 @@ contract ArtToken is TokenPublicKey, TokenChangeOwnerEvent, IArtToken {
      *************/
     /**
      * Returns art info.
-     * creator ....... Public key of creator.
+     * creator ....... Address of creator.
      * creatorFees ... Creator fee. e.g. 1 = 0.01%. 1 is minimum. 10_000 is maximum.
      * hash .......... Hash of data that associated with token.
      * hashesCount ... Total count of hashes.
      */
     function receiveArtInfo() override external view responsible returns(
-            uint256 creator,
+            address creator,
             uint32  creatorFees,
             uint256 hash,
             uint32  hashesCount
@@ -88,12 +88,12 @@ contract ArtToken is TokenPublicKey, TokenChangeOwnerEvent, IArtToken {
      ***********/
     /**
      * Returns art info.
-     * creator ............. Public key of creator.
+     * creator ............. Address of creator.
      * creatorFees ......... Creator fee. e.g. 1 = 0.01%. 1 is minimum. 10_000 is maximum.
      * hash ................ Hash of data that associated with token.
      * hashesCount ......... Total count of hashes.
      */
-    function getArtInfo() public view returns(uint256 creator, uint32 creatorFees, uint256 hash, uint32 hashesCount) {
+    function getArtInfo() public view returns(address creator, uint32 creatorFees, uint256 hash, uint32 hashesCount) {
         creator = _creator;
         creatorFees = _creatorFees;
         hashesCount = uint32(_hashes.length);

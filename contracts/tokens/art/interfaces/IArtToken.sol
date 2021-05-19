@@ -6,13 +6,13 @@ interface IArtToken {
      *************/
     /**
      * Returns art info.
-     * creator ....... Public key of creator.
+     * creator ....... Address of creator.
      * creatorFees ... Creator fee. e.g. 1 = 0.01%. 1 is minimum. 10_000 is maximum.
      * hash .......... Hash of data that associated with token.
      * hashesCount ... Total count of hashes.
      */
     function receiveArtInfo() external view responsible returns(
-            uint256 creator,
+            address creator,
             uint32  creatorFees,
             uint256 hash,
             uint32  hashesCount

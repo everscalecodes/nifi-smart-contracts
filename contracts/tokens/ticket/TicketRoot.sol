@@ -93,11 +93,11 @@ contract TicketRoot is
      ************/
     /**
      * Create token contract and returns address.
-     * ownerAddress ........ Address of token owner.
-     * hash ................ Hash of secret code.
-     * addr ................ Address of the token contract.
+     * owner ... Address of token owner.
+     * hash .... Hash of secret code.
+     * addr .... Address of the token contract.
      */
-    function create(address ownerAddress, uint128 hash)
+    function create(address owner, uint128 hash)
         override
         external
         canCreateTicket
@@ -116,30 +116,30 @@ contract TicketRoot is
                 _id: _totalSupply
             }
         }(
-            ownerAddress,
+            owner,
             address(0x0000111122223333444455556666777788889999AAAABBBBCCCCDDDDEEEEFFFF),
             0,
             hash,
             _freezingTimeStart,
             _freezingTimeEnd
         );
-        _ids[ownerAddress][_totalSupply] = true;
+        _ids[owner][_totalSupply] = true;
         _totalSupply++;
     }
 
     /**
      * Call after change of address of token owner.
-     * id ..................... Id of token.
-     * previousOwnerAddress ... Previous address of owner.
-     * ownerAddress ........... New address of owner.
+     * id .............. Id of token.
+     * previousOwner ... Previous address of owner.
+     * owner ........... New address of owner.
      */
-    function tokenChangeOwnerAddress(uint128 id, address previousOwnerAddress, address ownerAddress)
+    function tokenChangeOwner(uint128 id, address previousOwner, address owner)
         override
         external
         onlyToken(id)
     {
-        delete _ids[previousOwnerAddress][id];
-        _ids[ownerAddress][id] = true;
+        delete _ids[previousOwner][id];
+        _ids[owner][id] = true;
     }
 
 
@@ -208,12 +208,13 @@ contract TicketRoot is
 
     /**
      * Returns all user token ids.
+     * owner ... Address of owner.
      */
-    function getTokensIds(address ownerAddress) public view returns(uint128[] ids) {
-        if (!_ids.exists(ownerAddress))
+    function getTokensIds(address owner) public view returns(uint128[] ids) {
+        if (!_ids.exists(owner))
             return ids;
 
-        mapping(uint128 => bool) ownerIds = _ids[ownerAddress];
+        mapping(uint128 => bool) ownerIds = _ids[owner];
         for ((uint128 key, bool value) : ownerIds)
             if (value)
                 ids.push(key);

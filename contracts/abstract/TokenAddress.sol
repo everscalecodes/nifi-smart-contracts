@@ -27,15 +27,15 @@ abstract contract TokenAddress is Token, ITokenAddress {
     /*************
      * VARIABLES *
      *************/
-    address private _ownerAddress;
+    address private _owner;
 
 
 
     /*************
      * MODIFIERS *
      *************/
-    modifier canChangeOwnerAddress() {
-        _canChangeOwnerAddress();
+    modifier canChangeOwner() {
+        _canChangeOwner();
         _;
     }
 
@@ -45,18 +45,18 @@ abstract contract TokenAddress is Token, ITokenAddress {
      * CONSTRUCTOR *
      ***************/
     /**
-     * ownerAddress ........ Address of token owner.
+     * owner ............... Address of token owner.
      * manager ............. Contract that governs this contract.
      *                       If you don't want to set the manager, use 0:0000111122223333...
      * managerUnlockTime ... UNIX time. Time when the manager can be unlocked.
      *                       If you don't want to set the manager, use 0.
      */
-    constructor(address ownerAddress, address manager, uint32 managerUnlockTime)
+    constructor(address owner, address manager, uint32 managerUnlockTime)
         public
-        addressIsNotNull(ownerAddress)
+        addressIsNotNull(owner)
         Token(manager, managerUnlockTime)
     {
-        _ownerAddress = ownerAddress;
+        _owner = owner;
     }
 
 
@@ -66,19 +66,19 @@ abstract contract TokenAddress is Token, ITokenAddress {
      *******************************************************/
     /**
      * Owner or manager can change token owner address.
-     * ownerAddress ... Address of token owner.
+     * owner ... Address of token owner.
      */
-    function changeOwnerAddress(address ownerAddress)
+    function changeOwner(address owner)
         override
         external
         onlyUnlockedOwnerOrLockedManager
-        addressIsNotNull(ownerAddress)
-        canChangeOwnerAddress
+        addressIsNotNull(owner)
+        canChangeOwner
         accept
     {
-        address previousOwnerAddress = _ownerAddress;
-        _ownerAddress = ownerAddress;
-        _onChangeOwnerAddress(previousOwnerAddress, ownerAddress);
+        address previousOwner = _owner;
+        _owner = owner;
+        _onChangeOwner(previousOwner, owner);
     }
 
 
@@ -91,7 +91,7 @@ abstract contract TokenAddress is Token, ITokenAddress {
      * root ............... Address of root contract.
      * id ................. Id of token.
      * publicKey .......... Public key of root contract. tvm.pubkey()
-     * ownerAddress ....... Address of token owner.
+     * owner .............. Address of token owner.
      * manager ............ Contract that governs this contract.
      * managerUnlockTime .. UNIX time. Time when manager can be unlocked.
      */
@@ -99,7 +99,7 @@ abstract contract TokenAddress is Token, ITokenAddress {
             address root,
             uint128 id,
             uint256 publicKey,
-            address ownerAddress,
+            address owner,
             address manager,
             uint32  managerUnlockTime
         )
@@ -117,7 +117,7 @@ abstract contract TokenAddress is Token, ITokenAddress {
      * root ............... Address of root contract.
      * id ................. Id of token.
      * publicKey .......... Public key of root contract. tvm.pubkey()
-     * ownerAddress ....... Address of token owner.
+     * owner .............. Address of token owner.
      * manager ............ Contract that governs this contract.
      * managerUnlockTime .. UNIX time. Time when the manager can be unlocked.
      */
@@ -125,7 +125,7 @@ abstract contract TokenAddress is Token, ITokenAddress {
             address root,
             uint128 id,
             uint256 publicKey,
-            address ownerAddress,
+            address owner,
             address manager,
             uint32  managerUnlockTime
         )
@@ -133,7 +133,7 @@ abstract contract TokenAddress is Token, ITokenAddress {
         root = _root;
         id = _id;
         publicKey = tvm.pubkey();
-        ownerAddress = _ownerAddress;
+        owner = _owner;
         manager = _manager;
         managerUnlockTime = _managerUnlockTime;
     }
@@ -147,16 +147,18 @@ abstract contract TokenAddress is Token, ITokenAddress {
      * Returns true if contract called by owner.
      */
     function _onlyOwner() override internal view returns(bool) {
-        return msg.sender == _ownerAddress;
+        return msg.sender == _owner;
     }
 
     /**
      * Call after change of address of token owner.
+     * previousOwner ... Previous address of token owner.
+     * owner ........... New address of token owner.
      */
-    function _onChangeOwnerAddress(address previousOwnerAddress, address ownerAddress) virtual internal;
+    function _onChangeOwner(address previousOwner, address owner) virtual internal;
 
     /**
      * Revert() if owner or manager can't change owner address.
      */
-    function _canChangeOwnerAddress() virtual internal;
+    function _canChangeOwner() virtual internal;
 }

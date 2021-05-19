@@ -6,9 +6,9 @@ interface IRootTokenChangeOwnerAddress {
      ************/
     /**
      * Call after change of address of token owner.
-     * id ..................... Id of token.
-     * previousOwnerAddress ... Previous address of owner.
-     * ownerAddress ........... New address of owner.
+     * id .............. Id of token.
+     * previousOwner ... Previous address of owner.
+     * owner ........... New address of owner.
      */
-    function tokenChangeOwnerAddress(uint128 id, address previousOwnerAddress, address ownerAddress) external;
+    function tokenChangeOwner(uint128 id, address previousOwner, address owner) external;
 }

@@ -153,6 +153,8 @@ abstract contract TokenPublicKey is Token, PublicKeyValidator, ITokenPublicKey {
 
     /**
      * Call after change of public key of token owner.
+     * previousOwner ... Previous public key of token owner.
+     * owner ........... New public key of token owner.
      */
     function _onChangeOwner(uint256 previousOwner, uint256 owner) virtual internal;
 

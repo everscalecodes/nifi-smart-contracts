@@ -21,7 +21,7 @@
 		{
 			"name": "create",
 			"inputs": [
-				{"name":"ownerAddress","type":"address"},
+				{"name":"owner","type":"address"},
 				{"name":"hash","type":"uint128"}
 			],
 			"outputs": [
@@ -29,11 +29,11 @@
 			]
 		},
 		{
-			"name": "tokenChangeOwnerAddress",
+			"name": "tokenChangeOwner",
 			"inputs": [
 				{"name":"id","type":"uint128"},
-				{"name":"previousOwnerAddress","type":"address"},
-				{"name":"ownerAddress","type":"address"}
+				{"name":"previousOwner","type":"address"},
+				{"name":"owner","type":"address"}
 			],
 			"outputs": [
 			]
@@ -81,7 +81,7 @@
 		{
 			"name": "getTokensIds",
 			"inputs": [
-				{"name":"ownerAddress","type":"address"}
+				{"name":"owner","type":"address"}
 			],
 			"outputs": [
 				{"name":"ids","type":"uint128[]"}
