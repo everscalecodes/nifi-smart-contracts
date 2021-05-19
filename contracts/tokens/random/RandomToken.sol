@@ -5,6 +5,19 @@ import "../../abstract/TokenPublicKey.sol";
 import "interfaces/IRandomToken.sol";
 import "../../abstract/extensions/tokenChangeOwnerEvent/token/TokenChangeOwnerEvent.sol";
 
+/**
+ * Error codes
+ *     100 - Method for the owner only
+ *     101 - Method for the manager only
+ *     102 - Method for the owner or manager only
+ *     103 - Method for the root only
+ *     104 - Manager unlocked
+ *     105 - Manager locked
+ *     106 - Invalid lock time
+ *
+ *     200 - Public key can't be null
+ *     201 - Address can't be null
+ */
 contract RandomToken is TokenPublicKey, TokenChangeOwnerEvent, IRandomToken {
     /*************
      * VARIABLES *
