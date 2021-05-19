@@ -7,19 +7,15 @@
     "cp": "cp configs/config.example.ts configs/config.ts",
     "make": "ts-node scripts/make",
     "startup": "ts-node scripts/startup",
-
     "artRoot": "ts-node scripts/artRoot/info",
     "artRoot.deploy": "ts-node scripts/artRoot/deploy",
-
     "giver": "ts-node scripts/giver/info",
     "giver.deploy": "ts-node scripts/giver/deploy",
     "giver.send": "ts-node scripts/giver/send",
-
     "wallet": "ts-node scripts/wallet/info",
     "wallet.deploy": "ts-node scripts/wallet/deploy",
     "wallet.send": "ts-node scripts/wallet/send",
     "wallet.call": "ts-node scripts/wallet/call",
-
     "test": "jest --detectOpenHandles --forceExit --runInBand --verbose"
   },
   "author": "Kok Kek",
@@ -32,7 +28,6 @@
     "@types/node": "^14.14.31",
     "colors": "^1.4.0",
     "jest": "^26.6.3",
-    "logger": "kokkekpek/logger#^1.1.1",
     "tondev": "^0.6.0",
     "ts-jest": "^26.5.2",
     "ts-node": "^9.1.1",

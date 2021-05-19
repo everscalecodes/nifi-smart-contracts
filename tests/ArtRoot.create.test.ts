@@ -45,10 +45,10 @@ it('Valid', async done => {
         artRootData.abi,
         'create',
         {
-            owner: Ton.hex.x0(multisigKeys.public),
+            owner: await multisig.calculateAddress(),
             manager: '0:0000000000000000000000000000000000000000000000000000000000000001',
             managerUnlockTime: 0,
-            creator: Ton.hex.x0(multisigKeys.public),
+            creator: await multisig.calculateAddress(),
             creatorFees: 0,
             hash: hash
         },

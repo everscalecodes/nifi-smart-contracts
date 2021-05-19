@@ -18,17 +18,6 @@ export default class ArtToken extends Contract {
 
 
 
-    /**********
-     * PUBLIC *
-     **********/
-    public addHash(hash: string, keys: KeyPair): Promise<ResultOfProcessMessage> {
-        return this._call('addHash', {
-            hash: hash
-        }, keys)
-    }
-
-
-
     /***********
      * GETTERS *
      ***********/

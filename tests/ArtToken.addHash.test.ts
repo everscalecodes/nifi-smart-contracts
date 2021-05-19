@@ -1,6 +1,7 @@
 import config from '../configs/config'
 import ArtRoot from '../contracts/ArtRoot'
 import {KeyPair} from '@tonclient/core/dist/modules'
+import artTokenData from '../contracts/tokens/art/ArtToken'
 import artRootData from '../contracts/tokens/art/ArtRoot'
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
@@ -45,16 +46,29 @@ it('Valid', async done => {
         artRootData.abi,
         'create',
         {
-            owner: Ton.hex.x0(multisigKeys.public),
+            owner: await multisig.calculateAddress(),
             manager: '0:0000000000000000000000000000000000000000000000000000000000000001',
             managerUnlockTime: 0,
-            creator: Ton.hex.x0(multisigKeys.public),
+            creator: await multisig.calculateAddress(),
             creatorFees: 0,
             hash: '0x0000000000000000000000000000000000000000000000000000000000000000'
         },
         multisigKeys
     )
-    await artToken.addHash(newHash, multisigKeys)
+    await artToken.waitForTransaction()
+    await multisig.callAnotherContract(
+        await artToken.calculateAddress(),
+        1_000_000_000,
+        true,
+        0,
+        artTokenData.abi,
+        'addHash',
+        {
+            hash: newHash
+        },
+        multisigKeys
+    )
+    await artToken.waitForTransaction()
     expect((await artToken.getArtInfo()).hash).toBe(newHash)
 
     done()
