@@ -1,10 +1,21 @@
 pragma ton-solidity ^0.44.0;
-pragma AbiHeader pubkey;
 
 import "../../abstract/extensions/tokenChangeOwnerEvent/token/TokenChangeOwnerAddressEvent.sol";
 import "../../abstract/TokenAddress.sol";
 import "interfaces/IArtToken.sol";
 
+/**
+ * Error codes
+ *     100 - Method for the owner only
+ *     101 - Method for the manager only
+ *     102 - Method for the owner or manager only
+ *     103 - Method for the root only
+ *     104 - Manager unlocked
+ *     105 - Manager locked
+ *     106 - Invalid lock time
+ *
+ *     201 - Address can't be null
+ */
 contract ArtToken is TokenAddress, TokenChangeOwnerAddressEvent, IArtToken {
     /*************
      * VARIABLES *
