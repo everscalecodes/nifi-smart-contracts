@@ -79,9 +79,16 @@ contract Root {
 ### Each contract consists of several blocks
 Each block begins with a three-line commentary for easy navigation. Blocks in the following order.
 ```sol
-    /*************
+    /**********
+     * EVENTS *
+     **********/
+    event BidEvent(uint128 id, address creator, address bider, uint128 value);
+
+
+
+    /**************
      * STRUCTURES *
-     *************/
+     **************/
     struct MyStructure {
         address sender;
         string  name;
@@ -96,7 +103,14 @@ Each block begins with a three-line commentary for easy navigation. Blocks in th
      
      
      
-    /**************
+    /**********
+     * STATIC *
+     **********/
+    address static _root;
+    
+    
+    
+    /*************
      * VARIABLES *
      *************/
     uint256 private _x;
