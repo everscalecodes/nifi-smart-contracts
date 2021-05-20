@@ -1,7 +1,7 @@
 import config from '../configs/config'
 import AuctionRoot from '../contracts/AuctionRoot'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import auctionRootData from '../contracts/trade/DirectAuction'
+import auctionRootData from '../contracts/trade/DirectAuctionRoot'
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import AuctionToken from '../contracts/Auction'
@@ -47,14 +47,15 @@ it('Valid', async done => {
         {
             creator:  await multisig.calculateAddress(),
             token: '0:0000000000000000000000000000000000000000000000000000000000012345',
-            tartBid: 100_000_000,
+            startBid: 100_000_000,
             stepBid: 100_000_000,
             feeBid: 100_000_000,
-            startTime: new Date().getTime() / 1000 + 60,
-            endTime: new Date().getTime() / 1000 + 120,
+            startTime: Math.round(new Date().getTime() / 1000) + 60,
+            endTime: Math.round(new Date().getTime() / 1000) + 120,
         },
         multisigKeys
     )
+
     expect((await auctionToken.getInfo()).token).toBe('0:0000000000000000000000000000000000000000000000000000000000012345')
 
     done()
