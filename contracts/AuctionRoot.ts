@@ -4,7 +4,7 @@ import {DecodedMessageBody, KeyPair} from '@tonclient/core/dist/modules'
 import Contract from '../library/ton/base/Contract'
 import KitInterface from '../library/ton/utils/interfaces/KitInterface'
 
-export default class ArtRoot extends Contract {
+export default class AuctionRoot extends Contract {
     public constructor(kit: KitInterface, keys: KeyPair) {
         super(kit, {
             abi: AuctionRootContracts.abi,
