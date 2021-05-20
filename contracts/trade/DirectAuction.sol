@@ -79,6 +79,7 @@ contract DirectAuction {
     }
 
     function finish() public auctionFinished {
+        tvm.accept();
         if (_curBid.bider != address(0)) {
             IArtToken(_token).changeOwner(_curBid.bider);
             IArtToken(_token).unlock();

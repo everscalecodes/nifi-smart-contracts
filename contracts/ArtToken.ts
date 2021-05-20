@@ -16,8 +16,6 @@ export default class ArtToken extends Contract {
         })
     }
 
-
-
     /***********
      * GETTERS *
      ***********/
@@ -25,6 +23,21 @@ export default class ArtToken extends Contract {
         const result: DecodedMessageBody = await this._run('getArtInfo')
         return result.value
     }
+
+    public async getInfo(): Promise<Info> {
+        const result: DecodedMessageBody = await this._run('getInfo')
+        return result.value
+    }
+
+}
+
+export interface Info {
+    root: string
+    id: string
+    publicKey: string
+    owner: string
+    manager: string
+    managerUnlockTime: string
 }
 
 export interface ArtInfo {
@@ -33,3 +46,4 @@ export interface ArtInfo {
     hash: string
     hashesCount: string
 }
+

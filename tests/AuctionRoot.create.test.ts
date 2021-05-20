@@ -33,8 +33,8 @@ it('Valid', async done => {
         '0:0000000000000000000000000000000000000000000000000000000000000001',
         1_000_000_000,
         100_000_000,
-        Ton.hex.string('Art'),
-        Ton.hex.string('ART')
+        Ton.hex.string('Auction'),
+        Ton.hex.string('AUCTION')
     )
 
     await multisig.callAnotherContract(
@@ -55,6 +55,7 @@ it('Valid', async done => {
         },
         multisigKeys
     )
+    await auctionToken.waitForTransaction()
 
     expect((await auctionToken.getInfo()).token).toBe('0:0000000000000000000000000000000000000000000000000000000000012345')
 

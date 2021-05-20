@@ -3,7 +3,7 @@ import {DecodedMessageBody, KeyPair} from '@tonclient/core/dist/modules'
 import KitInterface from '../library/ton/utils/interfaces/KitInterface'
 import Contract from '../library/ton/base/Contract'
 
-export default class ArtToken extends Contract {
+export default class AuctionToken extends Contract {
     public constructor(kit: KitInterface, root: string, id: number, keys: KeyPair) {
         super(kit, {
             abi: AuctionContract.abi,
@@ -16,7 +16,9 @@ export default class ArtToken extends Contract {
         })
     }
 
-
+    public async finish(): Promise<void>  {
+        await this._call('finish');
+    }
 
     /***********
      * GETTERS *
