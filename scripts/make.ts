@@ -11,8 +11,8 @@ const make: Make = new Make({
         'contracts/tokens/ticket/TicketToken',
         'contracts/tokens/ticket/TicketRoot',
 
-        'contracts/trade/DirectAuctionPublicKeyRoot',
-        'contracts/trade/DirectAuctionPublicKey'
+        'contracts/trade/DirectAuctionRoot',
+        'contracts/trade/DirectAuction'
     ],
     wrap: [
         'library/ton/contracts/SafeMultisigWallet/SafeMultisigWallet',
