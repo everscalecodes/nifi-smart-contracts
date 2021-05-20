@@ -204,6 +204,7 @@ it('Valid', async done => {
     await auction.finish();
     await artToken.waitForTransaction()
     expect((await artToken.getInfo()).owner).toBe(await tip3Buyer1_multisig.calculateAddress())
+    await tip3Buyer1_multisig.waitForTransaction()
     expect(parseInt(await tip3Buyer1_multisig.getBalance())).toBeLessThan(5_000_000_000)
     
     const SellerBalance = parseInt(await tip3Seller_multisig.getBalance());
