@@ -35,16 +35,16 @@
 			"inputs": [
 			],
 			"outputs": [
-				{"name":"starTime","type":"uint32"},
-				{"name":"endTime","type":"uint32"},
+				{"name":"root","type":"address"},
+				{"name":"id","type":"uint128"},
+				{"name":"creator","type":"address"},
+				{"name":"token","type":"address"},
 				{"name":"startBid","type":"uint128"},
 				{"name":"stepBid","type":"uint128"},
-				{"components":[{"name":"bider","type":"address"},{"name":"value","type":"uint128"}],"name":"curBid","type":"tuple"},
 				{"name":"feeBid","type":"uint128"},
-				{"name":"token","type":"address"},
-				{"name":"creator","type":"address"},
-				{"name":"root","type":"address"},
-				{"name":"id","type":"uint128"}
+				{"name":"starTime","type":"uint32"},
+				{"name":"endTime","type":"uint32"},
+				{"components":[{"name":"bider","type":"address"},{"name":"value","type":"uint128"}],"name":"curBid","type":"tuple"}
 			]
 		}
 	],
@@ -58,6 +58,7 @@
 			"inputs": [
 				{"name":"id","type":"uint128"},
 				{"name":"creator","type":"address"},
+				{"name":"token","type":"address"},
 				{"name":"bider","type":"address"},
 				{"name":"value","type":"uint128"}
 			],
@@ -69,8 +70,9 @@
 			"inputs": [
 				{"name":"id","type":"uint128"},
 				{"name":"creator","type":"address"},
+				{"name":"token","type":"address"},
 				{"name":"bider","type":"address"},
-				{"name":"token","type":"address"}
+				{"name":"value","type":"uint128"}
 			],
 			"outputs": [
 			]
