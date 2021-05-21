@@ -7,15 +7,22 @@
     "cp": "cp configs/config.example.ts configs/config.ts",
     "make": "ts-node scripts/make",
     "startup": "ts-node scripts/startup",
+
     "artRoot": "ts-node scripts/artRoot/info",
     "artRoot.deploy": "ts-node scripts/artRoot/deploy",
+
+    "auctionRoot": "ts-node scripts/auctionRoot/info",
+    "auctionRoot.deploy": "ts-node scripts/auctionRoot/deploy",
+
     "giver": "ts-node scripts/giver/info",
     "giver.deploy": "ts-node scripts/giver/deploy",
     "giver.send": "ts-node scripts/giver/send",
+
     "wallet": "ts-node scripts/wallet/info",
     "wallet.deploy": "ts-node scripts/wallet/deploy",
     "wallet.send": "ts-node scripts/wallet/send",
     "wallet.call": "ts-node scripts/wallet/call",
+
     "test": "jest --detectOpenHandles --forceExit --runInBand --verbose"
   },
   "author": "Kok Kek",
