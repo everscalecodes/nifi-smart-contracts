@@ -14,12 +14,12 @@ import AuctionRoot from '../../contracts/AuctionRoot'
 async function run(): Promise<void> {
     TonClient.useBinaryLibrary(libNode)
     const kit: KitInterface = Ton.kit.create(config.net.deploy)
-    const artRootKeys: KeyPair = await TonKeysFile.createRandomIfNotExist(
+    const rootKeys: KeyPair = await TonKeysFile.createRandomIfNotExist(
         config.net.deploy.contracts.auctionRoot.keyFile,
         kit.client
     )
     const giverKeys: KeyPair = await TonKeysFile.createRandomIfNotExist(config.net.deploy.keys.giver, kit.client)
-    const auctionRoot: AuctionRoot = new AuctionRoot(kit, artRootKeys)
+    const auctionRoot: AuctionRoot = new AuctionRoot(kit, rootKeys)
     const giver: GiverV2 = new GiverV2(kit, giverKeys)
 
     await TerminalContractInfo.logNetwork(config.net.deploy)
@@ -58,7 +58,7 @@ async function run(): Promise<void> {
     await TerminalContractInfo.log()
     await TerminalContractInfo.logAccount('Giver', giver, config.net.deploy.locale)
     await TerminalContractInfo.log()
-    await TerminalContractInfo.logAccount('ArtRoot', auctionRoot, config.net.deploy.locale)
+    await TerminalContractInfo.logAccount('AuctionRoot', auctionRoot, config.net.deploy.locale)
     await TerminalContractInfo.log()
     process.exit()
 }
