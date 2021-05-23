@@ -12,7 +12,10 @@ const make: Make = new Make({
         'contracts/tokens/ticket/TicketRoot',
 
         'contracts/trade/DirectAuctionRoot',
-        'contracts/trade/DirectAuction'
+        'contracts/trade/DirectAuction',
+
+        'contracts/trade/OfferRoot',
+        'contracts/trade/Offer'
     ],
     wrap: [
         'library/ton/contracts/SafeMultisigWallet/SafeMultisigWallet',
