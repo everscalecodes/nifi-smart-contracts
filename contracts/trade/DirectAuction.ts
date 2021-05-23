@@ -82,7 +82,7 @@ const DirectAuctionContract = {
                         "type": "uint128"
                     },
                     {
-                        "name": "starTime",
+                        "name": "startTime",
                         "type": "uint32"
                     },
                     {
