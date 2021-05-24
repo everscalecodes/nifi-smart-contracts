@@ -104,7 +104,6 @@ contract Offer is Accept {
         address creator,
         address token,
         uint128 price,
-        uint128 fee,
         uint32  endTime
     )
         public onlyRoot accept
@@ -112,7 +111,6 @@ contract Offer is Accept {
         _creator = creator;
         _token = token;
         _price = price;
-        _fee = fee;
         _endTime = endTime;
         emit OfferCreated(_id, _creator, _token, _price);
     }
@@ -178,7 +176,6 @@ contract Offer is Accept {
             address creator,
             address token,
             uint128 price,
-            uint128 fee,
             uint32  endTime
         )
     {
@@ -187,7 +184,6 @@ contract Offer is Accept {
         creator = _creator;
         token = _token;
         price = _price;
-        fee = _fee;
         endTime = _endTime;       
     }
 }

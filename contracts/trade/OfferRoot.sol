@@ -61,7 +61,7 @@ contract OfferRoot is Root, RootManaged, RootManagedCreationAndStorageFee, RootM
                 _root: address(this),
                 _id: _totalSupply
             }
-        }( creator, token, price, _creationAndStorageFee, endTime);
+        }( creator, token, price, endTime);
         _totalSupply++;
     }
 
