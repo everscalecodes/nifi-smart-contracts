@@ -114,7 +114,7 @@ contract Offer is Accept {
         _price = price;
         _fee = fee;
         _endTime = endTime;
-        emit OfferCreated(_id, _creator, _token, _price).extAddr(_root);
+        emit OfferCreated(_id, _creator, _token, _price);
     }
 
 
@@ -145,7 +145,7 @@ contract Offer is Accept {
         ITokenAddress(_token).changeOwner(_creator);
         IToken(_token).unlock();
 
-        emit OfferAccepted(_id, _creator, _token, _price).extAddr(_root);
+        emit OfferAccepted(_id, _creator, _token, _price);
         selfdestruct(owner);
     }
 
@@ -153,7 +153,7 @@ contract Offer is Accept {
      * Everyone can call this method by external message.
      */
     function finish() public offerFinished accept {
-        emit OfferFinished(_id, _creator, _token, _price).extAddr(_root);
+        emit OfferFinished(_id, _creator, _token, _price);
         selfdestruct(_creator);
     }
 
