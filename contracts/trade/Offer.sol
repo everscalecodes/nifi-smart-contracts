@@ -19,7 +19,7 @@ contract Offer is Accept {
     /**********
      * EVENTS *
      **********/
-    event OfferCreated(uint128 id, address creator, address token, uint128 price);
+    event OfferCreated(uint128 id, address creator, address token, uint128 price, uint32 endTime);
     event OfferAccepted(uint128 id, address creator, address token, uint128 price);
     event OfferFinished(uint128 id, address creator, address token, uint128 price);
     
@@ -112,7 +112,7 @@ contract Offer is Accept {
         _token = token;
         _price = price;
         _endTime = endTime;
-        emit OfferCreated(_id, _creator, _token, _price);
+        emit OfferCreated(_id, _creator, _token, _price, _endTime);
     }
 
 
@@ -143,6 +143,7 @@ contract Offer is Accept {
         ITokenAddress(_token).changeOwner(_creator);
         IToken(_token).unlock();
 
+        _root.transfer({value: address(this).balance/20, flag: 1, bounce: true});
         emit OfferAccepted(_id, _creator, _token, _price);
         selfdestruct(owner);
     }
