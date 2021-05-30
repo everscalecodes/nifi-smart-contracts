@@ -138,9 +138,9 @@ contract DirectAuction is Accept {
     function finish() public auctionFinished accept {
         if (_curBid.bider != address(0)) {
             ITokenAddress(_token).changeOwner(_curBid.bider);
-            IToken(_token).unlock();
         }
 
+        IToken(_token).unlock();
         _root.transfer({value: address(this).balance/20, flag: 1, bounce: true});
         emit FinishEvent(_id, _creator, _token, _curBid.bider, _curBid.value);
         selfdestruct(_creator);
