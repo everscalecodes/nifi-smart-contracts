@@ -14,10 +14,13 @@ import OfferRoot from '../../contracts/OfferRoot'
 async function run(): Promise<void> {
     TonClient.useBinaryLibrary(libNode)
     const kit: KitInterface = Ton.kit.create(config.net.deploy)
-    const rootKeys: KeyPair = await TonKeysFile.createRandomIfNotExist(
+    /*const rootKeys: KeyPair = await TonKeysFile.createRandomIfNotExist(
         config.net.deploy.contracts.offerRoot.keyFile,
         kit.client
-    )
+    )*/
+    const rootKeys: KeyPair = 
+    {public: '2d63aa848a4ddef7369288ab8552d745bb2355c29735c3eb21e2086b473e5ddc',
+     secret: '578eb00d401b10fec61f3f89320137bf820cbab60af33de09e9e5d22ac3676be'}
     const giverKeys: KeyPair = await TonKeysFile.createRandomIfNotExist(config.net.deploy.keys.giver, kit.client)
     const offerRoot: OfferRoot = new OfferRoot(kit, rootKeys)
     const giver: GiverV2 = new GiverV2(kit, giverKeys)

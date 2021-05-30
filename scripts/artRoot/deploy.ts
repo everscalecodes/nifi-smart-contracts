@@ -14,10 +14,15 @@ import ArtRoot from '../../contracts/ArtRoot'
 async function run(): Promise<void> {
     TonClient.useBinaryLibrary(libNode)
     const kit: KitInterface = Ton.kit.create(config.net.deploy)
-    const artRootKeys: KeyPair = await TonKeysFile.createRandomIfNotExist(
+    /*const artRootKeys: KeyPair = await TonKeysFile.createRandomIfNotExist(
         config.net.deploy.contracts.artRoot.keyFile,
         kit.client
     )
+    console.log(artRootKeys.public);
+    console.log(artRootKeys.secret);*/
+    const artRootKeys: KeyPair = 
+        {public: '14b14ad580f32938e5e55e86d7252d3b60f89d7b0ac5c38398ccc04f55e132ab',
+         secret: 'c75ca9e512edb5d810d5f12befccd783ed80e7b989f6ad2b75003b54df2b5149'}
     const giverKeys: KeyPair = await TonKeysFile.createRandomIfNotExist(config.net.deploy.keys.giver, kit.client)
     const artRoot: ArtRoot = new ArtRoot(kit, artRootKeys)
     const giver: GiverV2 = new GiverV2(kit, giverKeys)
@@ -28,7 +33,7 @@ async function run(): Promise<void> {
     await TerminalContractInfo.log()
     await TerminalContractInfo.logAccount('ArtRoot', artRoot, config.net.deploy.locale)
     await TerminalContractInfo.log()
-
+    //process.exit()
     const balance: number = parseInt(await artRoot.getBalance())
     if (balance === 0) {
         await TerminalContractInfo.log('SENDING...')
