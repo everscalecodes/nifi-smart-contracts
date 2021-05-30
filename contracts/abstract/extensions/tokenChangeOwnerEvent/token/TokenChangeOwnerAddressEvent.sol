@@ -16,6 +16,6 @@ abstract contract TokenChangeOwnerAddressEvent is TokenAddress {
      * Call after change of address of token owner.
      */
     function _onChangeOwner(address previousOwner, address owner) override internal {
-        emit ChangeOwnerEvent(_id, previousOwner, owner).extAddr(_root);
+        emit ChangeOwnerEvent(_id, previousOwner, owner);
     }
 }
