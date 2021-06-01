@@ -16,6 +16,6 @@ abstract contract TokenChangeOwnerEvent is TokenPublicKey {
      * Call after change of public key of token owner.
      */
     function _onChangeOwner(uint256 previousOwner, uint256 owner) override internal {
-        emit ChangeOwnerEvent(_id, previousOwner, owner).extAddr(_root);
+        emit ChangeOwnerEvent(_id, previousOwner, owner);
     }
 }

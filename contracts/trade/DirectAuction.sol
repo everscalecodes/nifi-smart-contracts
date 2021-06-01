@@ -129,7 +129,7 @@ contract DirectAuction is Accept {
 
         _curBid.value = msg.value - _feeBid;
         _curBid.bider = msg.sender;
-        emit BidEvent(_id, _creator, _token, _curBid.bider, _curBid.value).extAddr(_root);
+        emit BidEvent(_id, _creator, _token, _curBid.bider, _curBid.value);
     }
 
     /**
@@ -138,9 +138,11 @@ contract DirectAuction is Accept {
     function finish() public auctionFinished accept {
         if (_curBid.bider != address(0)) {
             ITokenAddress(_token).changeOwner(_curBid.bider);
-            IToken(_token).unlock();
         }
-        emit FinishEvent(_id, _creator, _token, _curBid.bider, _curBid.value).extAddr(_root);
+
+        IToken(_token).unlock();
+        _root.transfer({value: address(this).balance/20, flag: 1, bounce: true});
+        emit FinishEvent(_id, _creator, _token, _curBid.bider, _curBid.value);
         selfdestruct(_creator);
     }
 

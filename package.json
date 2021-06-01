@@ -14,6 +14,9 @@
     "auctionRoot": "ts-node scripts/auctionRoot/info",
     "auctionRoot.deploy": "ts-node scripts/auctionRoot/deploy",
 
+    "offerRoot": "ts-node scripts/offerRoot/info",
+    "offerRoot.deploy": "ts-node scripts/offerRoot/deploy",
+
     "giver": "ts-node scripts/giver/info",
     "giver.deploy": "ts-node scripts/giver/deploy",
     "giver.send": "ts-node scripts/giver/send",
